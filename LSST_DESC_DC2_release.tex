@@ -1,0 +1,152 @@
+% ====================================================================
+%
+% LSST DESC DC2 Data Release Note
+%
+% ====================================================================
+
+\documentclass[11pt]{report}
+
+\include{inc/doc_settings} % formatting for doc, copied from SRM
+
+\include{inc/macros}       % commands and abbreviations, adapted from SRM doc_macros.tex
+
+% ====================================================================
+\usepackage{float,longtable,threeparttablex,booktabs}
+
+\begin{document}
+\pagenumbering{gobble}
+
+%%%%% TITLE PAGE
+\pagestyle{empty}
+
+\vspace*{0.2\textheight}
+
+\begin{center}
+{\Huge\bfseries The LSST Dark Energy Science Collaboration (DESC)\\
+\bigskip DC2 Data Release Note}
+
+\vspace*{0.2\textheight}
+
+\input{commitID.tex}
+
+\vspace*{0.1\textheight}
+
+\begin{figure}[!h]
+\centering\includegraphics[width=5cm,angle=0]{inc/desc-logo.png}
+\end{figure}
+
+\end{center}
+
+% %%%%% VERSION HISTORY
+\clearpage
+\include{inc/version}
+
+\clearpage
+
+\phantomsection\section*{Contributors}
+% Force the Contributor listing to show up in the TOC even though it's a section*:
+\addcontentsline{toc}{section}{Contributors}
+
+\input{inc/contributions.tex}
+
+
+% %%%%% TABLE OF CONTENTS
+\clearpage
+{\let\cleardoublepage\clearpage}
+
+\vspace*{-1.0in}
+\maketoc
+\label{toc}
+
+\clearpage
+
+%%%%%%%% FOOTER
+\pagestyle{fancy}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[R]{\thepage}  % page number in "outer" position of footer line
+% \fancyfoot[L]{\footernavigationbar}  % navigation to contents etc
+
+%%%%%%%% HEADER
+\fancyhead[L]{}
+\fancyhead[R]{LSST DESC DC2 Data Release}
+\renewcommand{\footrulewidth}{1pt}
+
+\setlength\parindent{0em}
+\setlength{\parskip}{0.5em}
+% ====================================================================
+
+% % FRONT MATTER
+% \renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
+% \setcounter{page}{0}
+
+% ====================================================================
+
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+
+\renewcommand\thefigure{\arabic{figure}}
+\setcounter{figure}{0}
+
+% ====================================================================
+
+\phantomsection\section*{Executive Summary and User Guide}
+% Force the Executive Summary to show up in the TOC even though it's a section*:
+\addcontentsline{toc}{section}{Executive Summary and User Guide}
+
+
+
+
+\section{Introduction}
+
+A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}.
+
+\section{Major Features of the Data Set}
+
+\section{Data Products}
+
+\section{Data Access}
+
+\section{Example Notebooks}
+
+\section{Conclusion and Outlook}
+
+
+
+\clearpage
+
+\phantomsection\section*{Acknowledgments}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+\input{desc-tex/ack/standard.tex}
+
+% Individual acknowledgments (sorted by author order)
+The work of APH, KH, EK, PL, and ASV at Argonne National Laboratory was supported under the U.S. DOE contract DE-AC02-06CH11357.
+
+
+
+
+% %%%%%%%% END MATTER
+\clearpage
+
+
+\bibliographystyle{inc/apj-mod}
+\phantomsection\bibliography{ref}
+
+
+\clearpage
+\appendix
+\renewcommand\thefigure{\thesection\arabic{figure}}
+\renewcommand\thetable{\thesection\arabic{table}}
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\Alph{section}\arabic{subsection}}
+
+\phantomsection\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+
+
+
+
+
+\end{document}
+
+% ====================================================================
