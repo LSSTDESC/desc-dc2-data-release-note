@@ -89,27 +89,122 @@
 
 % ====================================================================
 
-\phantomsection\section*{Executive Summary and User Guide}
+\phantomsection\section*{Executive Summary and Quick Start Guide}
 % Force the Executive Summary to show up in the TOC even though it's a section*:
-\addcontentsline{toc}{section}{Executive Summary and User Guide}
+\addcontentsline{toc}{section}{Executive Summary and Quick Start Guide}
 
 
 
 
 \section{Introduction}
 
-A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}.
+{\bf UNDER CONSTRUCTION!}
 
-\section{Major Features of the Data Set}
+\begin{itemize}
+\item Description of the purpose of the LSST DESC data challenges, including DC1 and DC2:
+\item Very brief overview of the generation
+\item Some example use cases
+\end{itemize}
+
+In the next decade the Vera C. Rubin Observatory will carry out an unprecedented survey of the sky, the Legacy Survey of Space and Time \citep{2009arXiv0912.0201L}. One of the major aims of the survey is to unravel the origin of the cause for the accelerated expansion of the Universe. The LSST Dark Energy Science Collaboration (DESC) was formed to carry out this exciting endeavor~\citep{Abate:2012za}. In order to prepare for the arrival of data, LSST DESC has prepared two data challenges, DC1 and DC2, based on sophisticated image simulations. The data challenges have been design to mimic actual data from the Rubin Observatory as closely as possible. 
+
+GENERAL DESCRIPTION OF THE DATA CHALLENGES: Both data challenges are based on realistic simulations of the extragalactic sky, imSim, LSST Science Pipelines~\citep{2017ASPC..512..279J} TBC. The first data challenge, DC1, covers a $\sim$40 deg$^2$ area and ten years of observations. The image simulations were carried out for $r$-band only. A detailed description and a range of analysis results are provided in~\cite{dc1}. 
+
+In this data release note, we focus on the second data challenge, DC2. A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}. For completeness, we provide a brief description here. MORE TEXT HERE. The underlying extragalactic catalog, cosmoDC2, is described in~\cite{korytov} and is publicly available\footnote{here...}.
+
+
+
+This note is organized as follows. In~\autoref{sec:features} we describe the major features of the DC2 dataset.
+We provide an overview of the data products that are part of this release in Section~\autoref{sec:products}.
+We provide instructions for how to access the data in~\autoref{sec:access}.
+Together with the data itself, we release a set of selected notebooks that contain examples for common data analysis tasks.
+The notebooks are introduced in~\autoref{sec:notebooks}.
+%In Section~\autoref{sec:validation} we present our validation and characterization of the DC2 data products.
+We conclude in~\ref{sec:outlook} and provide a brief description of possible future data releases. 
+
+\section{Major Features of the Dataset}
+\label{sec:features}
 
 \section{Data Products}
+\label{sec:products}
 
 \section{Data Access}
+\label{sec:access}
 
 \section{Example Notebooks}
+\label{sec:notebooks}
+
+\section{Validation and Characterization}
+\label{sec:validation}
+
+\subsection{Tests of the Object Table}
+
+These tests can be asked of any coadd catalog from real or simulated data.
+
+\begin{itemize}
+  \item Do we cover the RA and Dec as expected
+  \item Are stars point-like and galaxies extended?
+  \item Is the distribution of measured PSFs reasonable.  Note that this is on the coadds for the current level of processing, but the coadds should be representative of the distribution of PSFs from the input images.
+  \item Does a color-color diagram of stars look reasonable?
+  \item Are the image 5-sigma point-source depths reasonable?
+  \item Is the areal density of galaxies on the sky reasonable?
+      \begin{itemize}
+          \item Check both versus other surveys using real data of the real sky. 
+      \end{itemize}
+  \item Is the number density of galaxies vs. brightness (say i band magnitude) reasonable?
+      \begin{itemize}
+          \item Check both versus other surveys using real data of the real sky. 
+      \end{itemize}
+  \item Is the separation of stars vs. galaxies decent.  Does it behave as expected as a function of SNR?  Are there unexpected features?
+  \item Is the distribution of shape, ellipticity, and T second moments reasonable and as expected?
+  \item Is the distribution of [shear-based] e1, e2, e_abs reasonable?  Are there patterns in the distribution across the sky?
+  \item What's the relationship between different types of extended-object photometry?
+  \item Do Central Cluster galaxies follow the red sequence?
+  \begin{itemize}
+      \item Is the cluster red sequence visible in z vs. g-r and r-z vs. g-r plots of extended objects in the data?
+      \item If you run a cluster finder, and then identify central galaxies, do you find that the expected central cluster galaxy red sequence pops out clearly?
+  \end{itemize}
+
+\end{itemize}
+
+\subsection{Comparison of the Object Table with Truth.}
+
+Comparison against the known characteristics of the models without matching:
+
+\begin{itemize}
+  \item Does the areal density of stars match the input model of the Milky Way?
+  \item Does the number density of galaxies vs. brightness (say i band magnitude) match the input model?
+\end{itemize}
+
+The following questions can only be asked after matching the observered catalog to the truth catalogs.
+
+\begin{itemize}
+  \item Observed - Truth magnitude
+  \begin{itemize}
+      \item For stars, galaxies.  Point source and extended model photometry.
+      \item Is the distribution centered at 0?
+      \item Is it symmetric or skewed?
+      \item Is the skew consistent with (reverse) Malmquist bias at bright end?
+      \item As a function of brightness.
+        \item Does the scatter at the low SNR end follow the reported uncertainties?
+        \item What happens at the bright end? Are the effects of saturation visible?
+      \item Is a constant offset?  If so, is it consistent with a bookkeeping error somewhere?
+      \item What's the behavior for a SNR > 10 cut.
+  \end{itemize}
+
+  \item Galaxies
+  \begin{itemize}}
+      \item Do Central Cluster galaxies follow the red sequence?
+        \item Look in r-z vs g-r
+        \item This can be done using the truth catalog identify cluster members.  And the presented matched plots
+        \item Compare truth \item data vs. redshift
+        \item Compare truth -data vs. g-r color.
+        \item This analysis complements the data-only analysis above.
+    \end{itemize}
+\end{itemize}
 
 \section{Conclusion and Outlook}
-
+\label{sec:outlook}
 
 
 \clearpage

@@ -24,6 +24,12 @@
 \renewcommand\cftsubparafont{\footnotesize}
 \renewcommand\cftsubparapagefont{\footnotesize}
 
+% for \autoref
+\renewcommand*\sectionautorefname{Section}
+\renewcommand*\subsectionautorefname{Section}
+\renewcommand*\subsubsectionautorefname{Section}
+
+
 \usepackage{datetime}
 
 %\newcommand{\docheader}{{LSST DESC Operations Plan}}
@@ -235,44 +241,6 @@
 
 % --------------------------------------------------------------------
 
-% DEADLINE DATES
-
-%%%%%%% DESC MANAGEMENT TO ADJUST THE DATES BELOW WHEN NEEDED %%%%%%%%
-
-% Calendar years. The first quarter, Q1,
-% is taken to be Jan, Feb and Mar. The end of 2017 Q1 would be 03/17.
-% Starts of Q1,Q2,Q3,Q4 -> 01/YY, 04/YY, 07/YY, 10/YY
-%   Ends of Q1,Q2,Q3,Q4 -> 03/YY, 06/YY, 09/YY, 12/YY
-
-% DC1:
-\def\StartofDCOne{10/15}
-\def\StartofDCOneRQ{\StartofDCOne}
-\def\EndofDCOneRQ{12/15}
-\def\StartofDCOneDP{01/16}
-\def\EndofDCOneDP{09/16}
-\def\StartofDCOneDA{10/16}
-\def\EndofDCOneDA{06/17}
-\def\EndofDCOne{\EndofDCOneDA}
-
-% DC2:
-\def\StartofDCTwo{10/16}
-\def\StartofDCTwoRQ{\StartofDCTwo}
-\def\EndofDCTwoRQ{12/16}
-\def\StartofDCTwoDP{01/17}
-\def\EndofDCTwoDP{12/17}
-\def\StartofDCTwoDA{01/18}
-\def\EndofDCTwoDA{12/18}
-\def\EndofDCTwo{\EndofDCTwoDA}
-
-% DC3:
-\def\StartofDCThree{01/18}
-\def\StartofDCThreeRQ{\StartofDCThree}
-\def\EndofDCThreeRQ{03/18}
-\def\StartofDCThreeDP{04/18}
-\def\EndofDCThreeDP{03/19}
-\def\StartofDCThreeDA{04/19}
-\def\EndofDCThreeDA{03/20}
-\def\EndofDCThree{\EndofDCThreeDA}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
