@@ -128,8 +128,21 @@ We conclude in~\ref{sec:outlook} and provide a brief description of possible fut
 \section{Data Products}
 \label{sec:products}
 
+\subsection{Object Catalog}
+
+\input{inc/schema_object}
+
+\subsection{Truth-match Catalog}
+
+\input{inc/schema_truth}
+
+
 \section{Data Access}
 \label{sec:access}
+
+\subsection{Obtaining Data Files via Globus Online}
+
+\subsection{Accessing Data Files via GCRCatalogs}
 
 \section{Example Notebooks}
 \label{sec:notebooks}
@@ -157,7 +170,7 @@ These tests can be asked of any coadd catalog from real or simulated data.
       \end{itemize}
   \item Is the separation of stars vs. galaxies decent.  Does it behave as expected as a function of SNR?  Are there unexpected features?
   \item Is the distribution of shape, ellipticity, and T second moments reasonable and as expected?
-  \item Is the distribution of [shear-based] e1, e2, e_abs reasonable?  Are there patterns in the distribution across the sky?
+  \item Is the distribution of [shear-based] e1, e2, $e_abs$ reasonable?  Are there patterns in the distribution across the sky?
   \item What's the relationship between different types of extended-object photometry?
   \item Do Central Cluster galaxies follow the red sequence?
   \begin{itemize}
@@ -193,7 +206,7 @@ The following questions can only be asked after matching the observered catalog 
   \end{itemize}
 
   \item Galaxies
-  \begin{itemize}}
+  \begin{itemize}
       \item Do Central Cluster galaxies follow the red sequence?
         \item Look in r-z vs g-r
         \item This can be done using the truth catalog identify cluster members.  And the presented matched plots
