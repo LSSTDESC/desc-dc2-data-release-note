@@ -1,17 +1,37 @@
 \begin{ThreePartTable}
 \begin{TableNotes}
 \footnotesize
-\item [1] footnotes
+\item [\hypertarget{truth_fn1}{1}] When accessing this catalog as \code{dc2_object_run2.2i_dr6_wfd_with_truth_match} via \code{GCRCatalogs}, all the columns in this table, except for the last four, are postfixed with \code{_truth}.
+\item [\hypertarget{truth_fn2}{2}] Only present when accessing the catalog via \code{GCRCatalogs}.
+\item [\hypertarget{truth_fn3}{3}] Because the object catalog is used as the reference catalog for matching, some truth entries may appear more than once, and some truth entries may not have a matching object.
 \end{TableNotes}
-\begin{longtable}{p{1in}p{1in}p{1in}p{2.6in}}
-\endfirsthead
+\begin{longtable}{p{1.6in}p{0.5in}p{0.6in}p{2.9in}}
+\hline
+\textbf{Name}$^\text{\hyperlink{truth_fn1}{1}}$ & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ 
+\hline
 \endhead
 \endfoot
+\hline
 \insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
 \endlastfoot
-\hline
-\textbf{Name} & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ \hline
-\texttt{id}$^{1}$ & str & -- & Unique object ID \\
-\hline
+\code{id} & string & -- & Unique object ID \\ 
+\code{host_galaxy} & int64 & -- & ?? \toask{Joanne} \\ 
+\code{ra} & float64 & degree & Right Ascension \\
+\code{dec} & float64 & degree & Declination \\
+\code{redshift} & float32 & -- & Redshift \\ 
+\code{is_variable} & int32 & -- & 1 for a variable source \\ 
+\code{is_pointsource} & int32 & -- & 1 for a point source \\ 
+\code{flux_<band>} & float32 & nJy & Static flux value in \code{<band>} \\ 
+\code{flux_<band>_noMW} & float32 & nJy & Static flux value in \code{<band>}, without Milky Way extinction (i.e., dereddened) \\ 
+\code{mag_<band>}$^\text{\hyperlink{truth_fn1}{2}}$ & float32 & AB mag & Magnitude in \code{<band>} \\ 
+\code{mag_<band>_noMW}$^\text{\hyperlink{truth_fn1}{2}}$ & float32 & AB mag & Magnitude in \code{<band>}, without Milky Way extinction (i.e., dereddened) \\ 
+\code{tract} & int64 & -- & Tract ID in Sky Map \\ 
+\code{patch} & string & -- & Patch ID in Sky Map (as a string, \code{`x,y'}) \\ 
+\code{cosmodc2_hp} & int64 & -- & Healpix ID in cosmoDC2 (for galaxies only; $-1$ for stars and SNe) \\ 
+\code{cosmodc2_id} & int64 & -- & Galaxy ID in cosmoDC2 (for galaxies only; $-1$ for stars and SNe)\\ 
+\code{truth_type} & int64 & -- & 1 for galaxies, 2 for stars, and 3 for SNe \\ 
+\code{match_sep} & float64 & arcsec & On-sky separation to the matching object. $-1$ for unmatched truth entries$^\text{\hyperlink{truth_fn3}{3}}$ \\ 
+\code{match_objectId} & int64 & -- & \code{objectId} of the matching object. $-1$ for unmatched truth entries$^\text{\hyperlink{truth_fn3}{3}}$ \\ 
+\code{is_unique_truth_entry} & bool & -- & True for all truth entries that appear for the first time in this catalog$^\text{\hyperlink{truth_fn3}{3}}$ \\
 \end{longtable}
 \end{ThreePartTable}

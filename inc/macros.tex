@@ -64,13 +64,13 @@
 
 % Contact list - repo in URL must be set correctly to enable queries to be made:
 \newcommand{\contact}[2]{%
-\href{https://github.com/DarkEnergyScienceCollaboration/CosmologicalSimulationsPlan/issues/new?title=Question:\%20\&body=#2:\%20}{{\it #1}}%
+\href{https://github.com/LSSTDESC/CosmologicalSimulationsPlan/issues/new?title=Question:\%20\&body=#2:\%20}{{\it #1}}%
 }
 \newcommand{\dontcontact}[2]{{\it #1}}
 
 % Link to issue thread:
 \newcommand{\issue}[1]{%
-\href{https://github.com/DarkEnergyScienceCollaboration/CosmologicalSimulationsPlan/issues/#1}{\#{#1}}%
+\href{https://github.com/LSSTDESC/CosmologicalSimulationsPlan/issues/#1}{\#{#1}}%
 }
 
 
@@ -80,7 +80,9 @@
 
 % The \todo macro can be used to mark missing items or to pose questions to the group.
 \newcommand{\todo}[1]{\noindent{\textcolor{red}{[TODO: #1]}}}
-\newcommand{\toask}[1]{\noindent{\textcolor{magenta}{OPEN QUESTION: #1}}}
+\newcommand{\toask}[1]{\noindent{\textcolor{magenta}{[Q for #1]}}}
+\newcommand{\note}[1]{\noindent{\textcolor{blue}{[#1]}}}
+
 
 % Uncomment the following line to make the \todo items invisible.
 %\renewcommand\todo[1]{\relax}
@@ -90,6 +92,8 @@
   \@starttoc{tor}
 }
 
+% For inline code (like `...` in markdown)
+\DeclareUrlCommand\code{\urlstyle{tt}}
 
 % List of projects, designed to act as a table of contents in each
 % section:

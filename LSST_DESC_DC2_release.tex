@@ -98,7 +98,7 @@
 
 \section{Introduction}
 
-{\bf UNDER CONSTRUCTION!}
+\note{\bf UNDER CONSTRUCTION!}
 
 \begin{itemize}
 \item Description of the purpose of the LSST DESC data challenges, including DC1 and DC2:
@@ -120,7 +120,7 @@ We provide instructions for how to access the data in~\autoref{sec:access}.
 Together with the data itself, we release a set of selected notebooks that contain examples for common data analysis tasks.
 The notebooks are introduced in~\autoref{sec:notebooks}.
 %In Section~\autoref{sec:validation} we present our validation and characterization of the DC2 data products.
-We conclude in~\ref{sec:outlook} and provide a brief description of possible future data releases. 
+We conclude in~\autoref{sec:outlook} and provide a brief description of possible future data releases. 
 
 \section{Major Features of the Dataset}
 \label{sec:features}
@@ -150,12 +150,10 @@ We conclude in~\ref{sec:outlook} and provide a brief description of possible fut
 \section{Validation and Characterization}
 \label{sec:validation}
 
-MWV: I started this section, but maybe all of this stuff should go in a different paper.  We presented a few things in the DC2 Paper, and we're not going to be exhaustive here.  But I'm in favor of putting something that characterizes the data products in a Note describing the data products.
-We also might want to highlight known things that might otherwise trigger immediate questions.  E.g., the discreteness of the M-type stellar models.
+\note{MWV: I started this section, but maybe all of this stuff should go in a different paper.  We presented a few things in the DC2 Paper, and we're not going to be exhaustive here.  But I'm in favor of putting something that characterizes the data products in a Note describing the data products.
+We also might want to highlight known things that might otherwise trigger immediate questions.  E.g., the discreteness of the M-type stellar models.}
 
-MWV: Maybe another more minimally disruptive direction to go would be to include a rendered copy of the Object Table Validation notebook, \nolinkurl{validate_dc2_run2.2i_object_table.ipynb}, under the Example Notebooks or as an appendix.  Can add the tests Plaszczynski has been doing to this Notebook to help complete things.
-
-
+\note{MWV: Maybe another more minimally disruptive direction to go would be to include a rendered copy of the Object Table Validation notebook, \code{validate_dc2_run2.2i_object_table.ipynb}, under the Example Notebooks or as an appendix.  Can add the tests Plaszczynski has been doing to this Notebook to help complete things.}
 
 \subsection{Tests of the Object Table}
 
@@ -177,7 +175,7 @@ These tests can be asked of any coadd catalog from real or simulated data.
       \end{itemize}
   \item Is the separation of stars vs. galaxies decent.  Does it behave as expected as a function of SNR?  Are there unexpected features?
   \item Is the distribution of shape, ellipticity, and T second moments reasonable and as expected?
-  \item Is the distribution of [shear-based] e1, e2, $e_abs$ reasonable?  Are there patterns in the distribution across the sky?
+  \item Is the distribution of [shear-based] e1, e2, $e_\text{abs}$ reasonable?  Are there patterns in the distribution across the sky?
   \item What's the relationship between different types of extended-object photometry?
   \item Do Central Cluster galaxies follow the red sequence?
   \begin{itemize}
@@ -187,7 +185,7 @@ These tests can be asked of any coadd catalog from real or simulated data.
 
 \end{itemize}
 
-\subsection{Comparison of the Object Table with Truth.}
+\subsection{Comparison of the Object Table with Truth}
 
 Comparison against the known characteristics of the models without matching:
 
@@ -217,7 +215,8 @@ The following questions can only be asked after matching the observered catalog 
       \item Do Central Cluster galaxies follow the red sequence?
         \item Look in r-z vs g-r
         \item This can be done using the truth catalog identify cluster members.  And the presented matched plots
-        \item Compare truth \item data vs. redshift
+        \item Compare truth 
+        \item data vs. redshift
         \item Compare truth -data vs. g-r color.
         \item This analysis complements the data-only analysis above.
     \end{itemize}
@@ -236,7 +235,7 @@ The following questions can only be asked after matching the observered catalog 
 
 % Individual acknowledgments (sorted by author order)
 The work of APH, KH, EK, PL, and ASV at Argonne National Laboratory was supported under the U.S. DOE contract DE-AC02-06CH11357.
-
+Support for YYM was provided by NASA through the NASA Hubble Fellowship grant no.\ HST-HF2-51441.001 awarded by the Space Telescope Science Institute, which is operated by the Association of Universities for Research in Astronomy, Incorporated, under NASA contract NAS5-26555. 
 
 
 
