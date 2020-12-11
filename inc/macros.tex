@@ -83,7 +83,6 @@
 \newcommand{\toask}[1]{\noindent{\textcolor{magenta}{[Q for #1]}}}
 \newcommand{\note}[1]{\noindent{\textcolor{blue}{[#1]}}}
 
-
 % Uncomment the following line to make the \todo items invisible.
 %\renewcommand\todo[1]{\relax}
 
@@ -94,6 +93,10 @@
 
 % For inline code (like `...` in markdown)
 \DeclareUrlCommand\code{\urlstyle{tt}}
+
+% For creating hyperlinks
+\newcommand*{\https}[1]{\href{https://#1}{\nolinkurl{#1}}}
+\newcommand*{\http}[1]{\href{http://#1}{\nolinkurl{#1}}}
 
 % List of projects, designed to act as a table of contents in each
 % section:

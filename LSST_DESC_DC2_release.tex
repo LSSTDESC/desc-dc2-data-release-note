@@ -110,8 +110,7 @@ In the next decade the Vera C. Rubin Observatory will carry out an unprecedented
 
 GENERAL DESCRIPTION OF THE DATA CHALLENGES: Both data challenges are based on realistic simulations of the extragalactic sky, imSim, LSST Science Pipelines~\citep{2017ASPC..512..279J} TBC. The first data challenge, DC1, covers a $\sim$40 deg$^2$ area and ten years of observations. The image simulations were carried out for $r$-band only. A detailed description and a range of analysis results are provided in~\cite{dc1}. 
 
-In this data release note, we focus on the second data challenge, DC2. A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}. For completeness, we provide a brief description here. MORE TEXT HERE. The underlying extragalactic catalog, cosmoDC2, is described in~\cite{korytov} and is publicly available\footnote{here...}.
-
+In this data release note, we focus on the second data challenge, DC2. A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}. For completeness, we provide a brief description here. MORE TEXT HERE. The underlying extragalactic catalog, cosmoDC2, is described in~\cite{korytov} and is publicly available\footnote{\https{portal.nersc.gov/project/lsst/cosmoDC2/}}.
 
 
 This note is organized as follows. In~\autoref{sec:features} we describe the major features of the DC2 dataset.
@@ -128,21 +127,76 @@ We conclude in~\autoref{sec:outlook} and provide a brief description of possible
 \section{Data Products}
 \label{sec:products}
 
-\subsection{Object Catalog}
+This Release (v1) includes two major data sets: the ``Object Table'' and the ``Truth-match Table.'' 
+
+\subsection{Object Table}
+\label{sec:object}
+
+The Object Table contains information about static astronomical objects measured on a stacked (coadd) image. The photometry in the Object Table is measured with the forced photometry method, i.e., it is consistently measured across multiple bands using a fixed position, which is determined from the reference filter for each source (the filter that best measures the source). 
+
+The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipeline produces the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles LSE-163 for the end users. 
+
+\subsubsection{Available Data Sets}
+
+Object Tables that have been released publicly are listed below.
+
+\begin{itemize}
+  \item Run 2.2i DR6 (Year 1--5) WFD Object Table
+\end{itemize}
+
+\subsubsection{Object Table Schema}
 
 \input{inc/schema_object}
 
-\subsection{Truth-match Catalog}
+\subsection{Truth-match Table}
+\label{sec:truth}
+
+The Truth Table records the measurable fluxes of astronomical objects that are served as input values to the image simulations. Several types of astronomical objects are included in the image simulations: galaxies, stars, supernovae (SNe), active galactic nucleus (AGN) components, and multiply imaged quasars (QSOs). For the purpose of DC2 image simulations, 
+
+e. SNe were inserted in both the WFD and DDF
+region; all other components – strongly lensed SNe, AGN,
+strongly lensed AGN, and strongly lensed galaxies – are only
+sprinkled into the DDF region.
+
+\subsubsection{Available Data Sets}
+
+Truth-match tables that have been released publicly are listed below.
+
+\begin{itemize}
+  \item Run 2.2i Truth Table, with matching information to the DR6 WFD Object Table
+\end{itemize}
+
+\subsubsection{Truth-match Table Schema}
 
 \input{inc/schema_truth}
+
 
 
 \section{Data Access}
 \label{sec:access}
 
+All data products in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available in multiple development systems. 
+The data files can be easily downloaded to the user's machine via Globus Online (\autoref{sec:download}). 
+We further provide a Python package, \code{GCRCatalogs}, which contains a high-level user API to access the data (\autoref{sec:gcr}). 
+
+Each data set is partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Pipeline.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. 
+
+\begin{figure}[tbh!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figs/skymap.png}
+    \caption{Sky Map}
+    \label{fig:skymap}
+\end{figure}
+
+
+
 \subsection{Obtaining Data Files via Globus Online}
+\label{sec:download}
 
 \subsection{Accessing Data Files via GCRCatalogs}
+\label{sec:gcr}
+
+
 
 \section{Example Notebooks}
 \label{sec:notebooks}
@@ -152,6 +206,8 @@ We conclude in~\autoref{sec:outlook} and provide a brief description of possible
 
 \note{MWV: I started this section, but maybe all of this stuff should go in a different paper.  We presented a few things in the DC2 Paper, and we're not going to be exhaustive here.  But I'm in favor of putting something that characterizes the data products in a Note describing the data products.
 We also might want to highlight known things that might otherwise trigger immediate questions.  E.g., the discreteness of the M-type stellar models.}
+
+\note{YYM: Some of this characterization should go into Sec 2 ``Major Features''}
 
 \note{MWV: Maybe another more minimally disruptive direction to go would be to include a rendered copy of the Object Table Validation notebook, \code{validate_dc2_run2.2i_object_table.ipynb}, under the Example Notebooks or as an appendix.  Can add the tests Plaszczynski has been doing to this Notebook to help complete things.}
 
