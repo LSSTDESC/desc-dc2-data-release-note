@@ -151,7 +151,15 @@ Object Tables that have been released publicly are listed below.
 \subsection{Truth-match Table}
 \label{sec:truth}
 
-The Truth Table records the measurable fluxes of astronomical objects that are served as input values to the image simulations. Several types of astronomical objects are included in the image simulations: galaxies, stars, supernovae (SNe), active galactic nucleus (AGN) components, and multiply imaged quasars (QSOs). For the purpose of DC2 image simulations, 
+The Truth Table records the measurable fluxes of astronomical objects that are served as input values to the image simulations. Several types of astronomical objects are included in the image simulations: galaxies, stars, supernovae (SNe), active galactic nucleus (AGN) components, and multiply imaged quasars (QSOs). 
+
+
+In the Truth-match Table, we also store basic matching information with respect to the Object Table. The matching procedure is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. 
+Specifically, for each entry in the object catalog:
+\begin{enumerate}
+    \item Search for all truth entries that are within 1~arcsec and have a $r$-band magnitude difference ($\Delta r$) less than 1~mag. If one or more truth entries that satisfy these criteria are found, pick the truth entry that has the smallest $\Delta r$ as the match, and set \code{is_good_match} to True.
+    \item If no truth entry was found in Step (1), pick the truth entry that is the nearest neighbor of the object entry on sky as the match, and set \code{is_good_match} to False.
+\end{enumerate}
 
 
 \subsubsection{Available Data Sets}
@@ -159,7 +167,7 @@ The Truth Table records the measurable fluxes of astronomical objects that are s
 Truth-match tables that have been released publicly are listed below.
 
 \begin{itemize}
-  \item Run 2.2i Truth Table, with matching information to the DR6 WFD Object Table
+  \item Run 2.2i Truth Summary Table, with matching information to the DR6 WFD Object Table
 \end{itemize}
 
 \subsubsection{Truth-match Table Schema}
