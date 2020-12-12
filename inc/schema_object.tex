@@ -29,20 +29,20 @@
 \code{tract} & int64 & -- & Tract ID in Sky Map \\ 
 \code{patch} & string & -- & Patch ID in Sky Map (as a string, \code{`x,y'})\\ 
 %
-\code{Ixx} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of source intensity, averaged across bands \\
-\code{Ixx_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of source intensity in \code{<band>} \\
-\code{Iyy} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of source intensity in \code{<band>} \\
-\code{Iyy_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of source intensity, averaged across bands \\
-\code{Ixy} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of source intensity, averaged across bands \\
-\code{Ixy_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of source intensity in \code{<band>} \\
-\code{I_flag} & bool & -- & Flag for issues with \code{Ixx}, \code{Iyy}, and \code{Ixy} \\
-\code{I_flag_<band>} & bool & -- & Flag for issues with \code{Iyy_<band>}, \code{Ixy_<band>}, and \code{Ixx_<band>} \\
-\code{IxxPSF} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of PSFy, averaged across bands \\
-\code{IxxPSF_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of PSF in \code{<band>} \\
-\code{IyyPSF} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of PSFy, averaged across bands \\
-\code{IyyPSF_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of PSF in \code{<band>} \\
-\code{IxyPSF} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of PSFy, averaged across bands \\
-\code{IxyPSF_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of PSF in \code{<band>} \\
+\code{Ixx_pixel} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of source intensity, averaged across bands \\
+\code{Ixx_pixel_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of source intensity in \code{<band>} \\
+\code{Iyy_pixel} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of source intensity in \code{<band>} \\
+\code{Iyy_pixel_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of source intensity, averaged across bands \\
+\code{Ixy_pixel} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of source intensity, averaged across bands \\
+\code{Ixy_pixel_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of source intensity in \code{<band>} \\
+\code{I_flag} & bool & -- & Flag for issues with \code{Ixx}, \code{Iyy_pixel}, and \code{Ixy} \\
+\code{I_flag_<band>} & bool & -- & Flag for issues with \code{Iyy_pixel_<band>}, \code{Ixy_<band>}, and \code{Ixx_<band>} \\
+\code{IxxPSF_pixel} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of PSFy, averaged across bands \\
+\code{IxxPSF_pixel_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xx$) of PSF in \code{<band>} \\
+\code{IyyPSF_pixel} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of PSFy, averaged across bands \\
+\code{IyyPSF_pixel_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($yy$) of PSF in \code{<band>} \\
+\code{IxyPSF_pixel} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of PSFy, averaged across bands \\
+\code{IxyPSF_pixel_<band>} & float64 & sq.~pixel$^\text{\hyperlink{obj_fn1}{1}}$ & Adaptive second moment ($xy$) of PSF in \code{<band>} \\
 \code{psf_fwhm_<band>} & float64 & arcsec & PSF FWHM calculated from \code{base_SdssShape} \\
 \code{psNdata} & float32 & ?? & PSF flux area ?? \toask{MWV} \\
 %
