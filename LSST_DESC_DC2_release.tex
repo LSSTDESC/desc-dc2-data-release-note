@@ -101,51 +101,46 @@
 \note{\bf UNDER CONSTRUCTION!}
 
 \begin{itemize}
-\item Description of the purpose of the LSST DESC data challenges, including DC1 and DC2:
+\item Description of the purpose of the LSST DESC data challenges, including DC1 and DC2
 \item Very brief overview of the generation
 \item Some example use cases
 \end{itemize}
 
-In the next decade the Vera C. Rubin Observatory will carry out an unprecedented survey of the sky, the Legacy Survey of Space and Time \citep{2009arXiv0912.0201L}. One of the major aims of the survey is to unravel the origin of the cause for the accelerated expansion of the Universe. The LSST Dark Energy Science Collaboration (DESC) was formed to carry out this exciting endeavor~\citep{Abate:2012za}. In order to prepare for the arrival of data, LSST DESC has prepared two data challenges, DC1 and DC2, based on sophisticated image simulations. The data challenges have been design to mimic actual data from the Rubin Observatory as closely as possible. 
+In the next decade the Vera C. Rubin Observatory will carry out an unprecedented survey of the sky, the Legacy Survey of Space and Time \citep{2009arXiv0912.0201L}. One of the major aims of the survey is to unravel the origin of the cause for the accelerated expansion of the Universe. The LSST Dark Energy Science Collaboration (DESC) was formed to carry out this exciting endeavor~\citep{Abate:2012za}. In order to prepare for the arrival of data, LSST DESC has generated two data challenges, DC1 and DC2, using sophisticated image simulations. The data challenges have been designed to mimic actual data from the Rubin Observatory as closely as possible. As such, they cover a small, representative area of the actual LSST observing footprint. For LSST DESC, the data challenges serve multiple purposes. \note{TBC} By making some of the data products publicly available we hope that other Science Collaborations will be able to carry out useful tests for their data arrival preparation as well. In addition, the data should be of value for the broader optical astronomy and cosmology community.
 
-GENERAL DESCRIPTION OF THE DATA CHALLENGES: Both data challenges are based on realistic simulations of the extragalactic sky, imSim, LSST Science Pipelines~\citep{2017ASPC..512..279J} TBC. The first data challenge, DC1, covers a $\sim$40 deg$^2$ area and ten years of observations. The image simulations were carried out for $r$-band only. A detailed description and a range of analysis results are provided in~\cite{dc1}. 
-
-In this data release note, we focus on the second data challenge, DC2. A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}. For completeness, we provide a brief description here. MORE TEXT HERE. The underlying extragalactic catalog, cosmoDC2, is described in~\cite{korytov} and is publicly available\footnote{\https{portal.nersc.gov/project/lsst/cosmoDC2/}}.
+Both LSST DESC data challenges are based on realistic simulations of the extragalactic sky and employ a comprehensive image simulation capability, imSim. The resulting synthetic data were processed with the LSST Science Pipelines~\citep{2017ASPC..512..279J}. The first data challenge, DC1, covers a $\sim$40 deg$^2$ area and ten years of observations. The image simulations were carried out for $r$-band only. A detailed description and a range of analysis results are provided in~\cite{dc1}.  In this data release note, we focus on the second data challenge, DC2. A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}. DC2 covers $\sim$300 deg$^2$ in the wide-fast-deep (WFD) area to be surveyed by LSST. Within this area, a small, 1~deg$^2$ deep drilling field (DDF) has been simulated as well. For this data release, only data from the WFD campaign and 5 years of observations are provided, corresponding to the planned sixth Rubin data release, DR6. For DC2, all six optical bands $ugrizy$ are included in the image simulations.  
 
 
-This note is organized as follows. In~\autoref{sec:features} we describe the major features of the DC2 dataset.
-We provide an overview of the data products that are part of this release in Section~\autoref{sec:products}.
-We provide instructions for how to access the data in~\autoref{sec:access}.
-Together with the data itself, we release a set of selected notebooks that contain examples for common data analysis tasks.
-The notebooks are introduced in~\autoref{sec:notebooks}.
+
+This note is organized as follows. In~\autoref{sec:features} we describe the major features of the DC2 data set. We provide an overview of the data products that are part of this release in Section~\autoref{sec:products}. We provide instructions for how to access the data in~\autoref{sec:access}. Together with the data itself, we release a set of selected notebooks that contain examples for common data analysis tasks. The notebooks are introduced in~\autoref{sec:notebooks}.
 %In Section~\autoref{sec:validation} we present our validation and characterization of the DC2 data products.
 We conclude in~\autoref{sec:outlook} and provide a brief description of possible future data releases. 
 
-\section{Major Features of the Dataset}
+\section{Major Features of the Data set}
 \label{sec:features}
 \note{\bf UNDER CONSTRUCTION!}
 
-\subsection{Astrophysical Inputs}
+\subsection{Astrophysics Inputs}
 
-The astrophysical components of this dataset are mostly limited to the types of objects needed to support static probes of dark energy science, specifically the galaxies from the cosmoDC2 extragalactic catalog.  This dataset does include stars from a simulated Milky Way, which are needed for the astrometric and photometric calibration by the image processing pipeline, as well as type Ia supernovae, which were included throughout the 300~deg$^2$ DC2 region.
+The astrophysical components of this data set are mostly limited to the types of objects needed to support static probes of dark energy science, specifically the galaxies from the cosmoDC2 extragalactic catalog \citep{korytov}.  This data set does include stars from a simulated Milky Way, which are needed for the astrometric and photometric calibration by the image processing pipeline, as well as type Ia supernovae, which were included throughout the 300~deg$^2$ DC2 region.
 
-As noted, the galaxies are from the cosmoDC2 extragalactic catalog, which covers 440 deg$^2$ out to a redshift of $z = 3$ and are complete to $m_r <28$.  The cosmoDC2 catalog is based on the Outer Rim N-body simulation, and the properties of the galaxies were derived using the Galacticus semi-analyitic model.  These properties include stellar mass, morphology, spectral energy distributions, broadband filter magnitudes, host halo information, and weak lensing shear.  All galaxies have separate bulge and disk components that are rendered as sersic profiles, and galaxies with $m_i > 27$ have ``knots'' of star-formation added in order to model more complex light profiles for fainter galaxies. The fluxes for these star forming regions have been re-allocated from the disk component and the knots have the same SED as the disk.
+As noted, the galaxies are from the cosmoDC2 extragalactic catalog\footnote{Publicly available at \https{portal.nersc.gov/project/lsst/cosmoDC2/}}, which covers 440 deg$^2$ out to a redshift of $z = 3$ and are complete to $m_r <28$.  The cosmoDC2 catalog is based on the Outer Rim $N$-body simulation \citep{2019ApJS..245...16H}, and the properties of the galaxies were derived using the Galacticus semi-analyitic model \citep{benson_2010b}.  These properties include stellar mass, morphology, spectral energy distributions, broadband filter magnitudes, host halo information, and weak lensing shear.  All galaxies have separate bulge and disk components that are rendered as sersic profiles, and galaxies with $m_i > 27$ have ``knots'' of star-formation added in order to model more complex light profiles for the fainter galaxies. The fluxes for these star forming regions have been re-allocated from the disk component, and the knots have the same SED as the disk.
 
-The Milky Way stars are simulated using the Galfast model of Juric et al (2008), which is based on densities and colors of sources in SDSS. Stellar variability is included for periodic objects (e.g., RR Lyrae and Cepheids) and for non-periodic variables (e.g., CVs, flaring M-dwarfs, etc.).  Stars without a definitive variability class are modeled based on the Kepler Q17 data release.  The Galactic reddening is based on the three-dimensional model of Amores and Lepine (2005).
+The Milky Way stars are simulated using the Galfast model of \citet{2008ApJ...673..864J}, which is based on densities and colors of sources in the SDSS. Stellar variability is included for periodic objects (e.g., RR Lyrae and Cepheids) and for non-periodic variables (e.g., CVs, flaring M-dwarfs, etc.).  Stars without a definitive variability class are modeled based on the Kepler Q17 data release \citep{2016ksci.rept....3T}.  The Galactic reddening is based on the three-dimensional model of \cite{2005AJ....130..659A}.
 
 Finally, type Ia supernovae have been added throughout the DC2 region out to a redshift of $z=1.4$ with a population density that is consistent with observations.
 
 \subsection{Image Simulation Features}
 
-DC2 used the minion\_1016 observing cadence (ref) which was Rubin Observatory the baseline cadence at start of the DC2 simulations. This cadence provides provides the nominal field positions, telescope rotations, and filter selections for each pointing, as well as predicted seeing, airmass, and sky background components.  We have added random translational and rotational dithering to the nominal pointings in order to make the sky coverage more uniform.
+DC2 used the minion\_1016 observing cadence\footnote{\https{docushare.lsst.org/docushare/dsweb/View/Collection-4604}} which was Rubin Observatory the baseline cadence at start of the DC2 simulations. This cadence provides the nominal field positions, telescope rotations, and filter selections for each 30 second pointing, as well as predicted seeing, airmass, and sky background components.  We have added random translational and rotational dithering to the nominal pointings in order to make the sky coverage more uniform.
 
-The imSim simulation software uses the GalSim package (ref) to render the astrophysical objects and the night sky.  The PSFs for each exposure are computed using a set of atmospheric phase screens that are realizations of Gaussian random fields with a Von Karman power spectrum.  In addition, the PSF calculation includes an optical model of the telescope based on modeling of the active optics system for the Rubin Observatory.  After convolution with the PSF, objects are rendered using GalSim's sensor model which includes the brighter-fatter and tree-ring electrostatic effects that are seen in the types of CCDs used in LSSTCam.  Finally, electronics readout effects such as bleed trails, CCD segmentation, intra-CCD cross-talk, read noise, etc., are included. These effects are based on measurements of the actual LSSTCam hardware.
+The imSim simulation software uses the GalSim package \citep{2015A&C....10..121R} to render the astrophysical objects and the night sky.  The PSFs for each exposure are computed using a set of atmospheric phase screens that are realizations of Gaussian random fields with a Von Karman power spectrum.  In addition, the PSF calculation includes an optical model of the telescope based on modeling of the active optics system for the Rubin Observatory.  After convolution with the PSF, objects are rendered on the LSST CCDs taking into account the instrumental throughput in each band, the object's SED shape within the bandpass, atmospheric effects such as differential chromatic refraction, and the convergence of the incident beam from the telescope optics. GalSim's sensor model includes the brighter-fatter and tree-ring electrostatic effects that are present in the CCDs used in LSSTCam.  Finally, electronics readout effects such as bleed trails, CCD segmentation, intra-CCD cross-talk, read noise, etc., are applied.  These effects are based on measurements of the actual LSSTCam hardware.
 
 
-\section{Data Products}
+\section{Available Data Sets and Data Model}
 \label{sec:products}
 
-This Release (v1) includes two major data sets: the ``Object Table'' and the ``Truth-match Table.'' 
+This Data Release (v1) provides the data from the WFD campaign for 5 years of observations (corresponding to Rubin DR6). This data set includes two ``Tables'': the ``Object Table'' and the ``Truth-match Table.'' We define these tables and describe their data models in the subsections below. 
 
 \subsection{Object Table}
 \label{sec:object}
@@ -154,49 +149,28 @@ The Object Table contains information about static astronomical objects measured
 
 The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipeline produces the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles LSE-163 for the end users. 
 
-\subsubsection{Available Data Sets}
-
-Object Tables that have been released publicly are listed below.
-
-\begin{itemize}
-  \item Run 2.2i DR6 (Year 1--5) WFD Object Table
-\end{itemize}
-
-\subsubsection{Object Table Schema}
-
+Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectID}). There is no duplicated entries in the Object Table. For details about the physical representation of the Object Table, see \autoref{sec:representation}. The table below lists the Object Table schema. 
 \input{inc/schema_object}
 
 \subsection{Truth-match Table}
 \label{sec:truth}
 
-The Truth Table records the measurable fluxes of astronomical objects that are served as input values to the image simulations. Several types of astronomical objects are included in the image simulations: galaxies, stars, supernovae (SNe), active galactic nucleus (AGN) components, and multiply imaged quasars (QSOs). 
+The Truth-match Table is a joint representation of both the truth information (i.e., the measurable fluxes of astronomical objects that serve as input values to the image simulations), and their best matches to the measured objects in the Object Table. The Truth-match Table allows users to examine the differences between true and measured fluxes and positions, and compare to the expected levels of photometric and astrometric accuracy and precision.
 
-In the Truth-match Table, we also store basic matching information with respect to the Object Table. The matching procedure is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. 
-Specifically, for each entry in the Object Table:
+The generation of the Truth-match Table is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. The truth information in the Truth-match Table only includes ``summary'' properties (i.e., static, or infinite-time averaged fluxes) of galaxies (including infinite-time averaged AGN components), stars, and supernovae (SNe). Time-varying properties are not included. The match information stored in the  Truth-match Table is produced with the following procedure: For each entry in the Object Table:
 \begin{enumerate}
-    \item Search for all truth entries that are within 1~arcsec and have a $r$-band magnitude difference ($\Delta r$) less than 1~mag. If one or more truth entries that satisfy these criteria are found, pick the truth entry that has the smallest $\Delta r$ as the match, and set \code{is_good_match} to True.
+    \item Search for all truth entries that are within 1~arcsec and have a $r$-band magnitude difference ($\Delta r$) less than 1~mag. If one or more truth entries that satisfy these criteria are found, pick the truth entry that has the smallest $|\Delta r|$ as the match, and set \code{is_good_match} to True.
     \item If no truth entry was found in Step (1), pick the truth entry that is the nearest neighbor of the object entry on sky as the match, and set \code{is_good_match} to False.
 \end{enumerate}
-Given this procedure, every entry in the Object Table will be assigned exactly one match. The majority of object entries will have a ``good'' match (i.e., satisfying criteria in Step 1 above), and the rest would have a nearest-neighbor match. Note that more than 90\% of the ``good'' matches would also happen to be the nearest neighbor match. 
+Given this procedure, every entry in the Object Table is assigned exactly one match. The majority of object entries have a ``good'' match (i.e., satisfying criteria in Step 1 above), and the rest have a nearest-neighbor match. More than 90\% of the ``good'' matches are, not only the closest match in magnitude, but also the nearest neighbor match. 
 
-Because the Object Table was used as the reference catalog for the matching procedure, some truth entries may be chosen as a match more than once, while others may not be chosen as a match at all. To both preserve all truth information and facilitate comparison with the Object Table, the Truth-match Table is ordered in a specific fashion. For each file of the Truth-match Table,
-\begin{itemize}
-    \item The first $N$ rows have exactly the same row order as the  Object Table of the corresponding part of the sky, where $N$ is the number of Object Table entries.
-    \item The remaining $M$ rows are truth entries that were not chosen as a match; they all have \code{match_objectId == -1}.
-    \item Since some truth entries may appear more than once in the first $N$ rows, a boolean mask \code{is_unique_truth_entry} can be used to select unique truth entries. 
-\end{itemize}
-These structures are particularly important for users who wish to access the files directly. For users who use GCRCatalogs (\autoref{sec:gcr}), the reader will automatically select the correct rows depending on whether you are loading the Truth Table or the Match Table (see \autoref{sec:notebooks} for examples).
+The physical representation of the Truth-match Table is described in \autoref{sec:representation}. 
+However, it is important to note that, because the Object Table was used as the reference catalog for the matching procedure, some truth entries may be chosen as a match more than once, while others may not be chosen as a match at all.
 
+By selecting all entries with \code{match_objectId} $> -1$ from the Truth-match Table, one would obtain an subset of Truth-match entries that have exactly the same row order as the entries in Object Table (and hence may contain duplicated truth entries). On the other hand, by selecting all entries with \code{is_unique_truth_entry} being True, one  would obtain an subset of Truth-match entries that contain all unique truth entries, including truth entries that have not be chosen as a match.
+These selections are particularly important for users who wish to access the files directly. For users who use GCRCatalogs (\autoref{sec:gcr}), the reader will automatically select the correct rows depending on whether you are loading the Truth Table or the Match Table (see \autoref{sec:notebooks} for examples).
 
-\subsubsection{Available Data Sets}
-
-Truth-match tables that have been released publicly are listed below.
-
-\begin{itemize}
-  \item Run 2.2i Truth Summary Table, with matching information to the DR6 WFD Object Table
-\end{itemize}
-
-\subsubsection{Truth-match Table Schema}
+Finally, the table below lists the Truth-match Table schema.
 
 \input{inc/schema_truth}
 
@@ -205,11 +179,15 @@ Truth-match tables that have been released publicly are listed below.
 \section{Data Access}
 \label{sec:access}
 
-All data products in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available in multiple development systems. 
-The data files can be easily downloaded to the user's machine via Globus Online (\autoref{sec:download}). 
-We further provide a Python package, \code{GCRCatalogs}, which contains a high-level user API to access the data (\autoref{sec:gcr}). 
 
-Each data set is partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Pipeline.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. 
+\subsection{Physical Representation of the Data Sets}
+\label{sec:representation}
+
+All data tables in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available in multiple development systems. 
+The data files can be easily downloaded to the user's machine via Globus Online (\autoref{sec:download}). 
+We further provide a Python package, \code{GCRCatalogs}, which contains a high-level user API to access the data files (\autoref{sec:gcr}). 
+
+Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Pipeline.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; that is, an entry that is near the tract boundary still only appears in the tract it belongs to. 
 
 \begin{figure}[tbh!]
     \centering
