@@ -90,7 +90,7 @@ DC2 used the \code{minion_1016} observing cadence\footnote{Publicly available at
 The imSim simulation software uses the GalSim package \citep{2015A&C....10..121R} to render the astrophysical objects and the night sky.  The PSFs for each exposure are computed using a set of atmospheric phase screens that are realizations of Gaussian random fields with a Von Karman power spectrum.  In addition, the PSF calculation includes an optical model of the telescope based on modeling of the active optics system for Rubin Observatory.  After convolution with the PSF, objects are rendered on the LSST CCDs taking into account the instrumental throughput in each band, the object's SED shape within the bandpass, atmospheric effects such as differential chromatic refraction, and the convergence of the incident beam from the telescope optics. GalSim's sensor model includes the brighter-fatter and tree-ring electrostatic effects that are present in the CCDs used in LSSTCam.  Finally, electronics readout effects such as bleed trails, CCD segmentation, intra-CCD cross-talk, read noise, etc., are applied.  These effects are based on measurements of the actual LSSTCam hardware.
 
 
-\section{Available Data Sets and Data Model}
+\section{Available Data Sets}
 \label{sec:products}
 
 This Data Release (v1) provides the data from the WFD campaign for 5 years of observations (corresponding to Rubin's DR6). This data set includes two ``Tables'': the ``Object Table'' and the ``Truth-match Table.'' We define these tables and describe their data models in the subsections below. 
@@ -102,7 +102,7 @@ The Object Table contains information about static astronomical objects measured
 
 The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipeline produces the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles the Rubin LSST Data Products Definition Document (LSE-163) for the end users. 
 
-Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectID}). There are no duplicated entries in the Object Table. For details about the physical representation of the Object Table, see \autoref{sec:representation}. The table below lists the Object Table schema. 
+Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectID}). There are no duplicated entries in the Object Table. For details about the physical representation of the Object Table, see \autoref{sec:representation}. The full schema for the Object Table can be found in \autoref{app:object-schema}. 
 
 \subsection{Truth-match Table}
 \label{sec:truth}
@@ -121,8 +121,7 @@ Flags to distinguish these situations are included in the Truth-match table.
 Selecting all entries with \code{match_objectId} $> -1$ from the Truth-match Table would result in a subset of Truth-match entries that have exactly the same row order as the entries in Object Table (and hence may contain duplicated truth entries). On the other hand, selecting all entries with \code{is_unique_truth_entry} being True would produce a subset of Truth-match entries that contain all unique truth entries, including truth entries that have not be chosen as a match.
 These selections are particularly important for users who wish to access the files directly. For users who use GCRCatalogs (\autoref{sec:gcr}), the reader will automatically select the correct rows depending on whether you are loading the Truth Table or the Match Table (see \autoref{sec:notebooks} for examples).
 
-
-The physical representation of the Truth-match Table is described in \autoref{sec:representation}. The table below lists the Truth-match Table schema.
+The physical representation of the Truth-match Table is described in \autoref{sec:representation}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
 
 
 
@@ -179,11 +178,13 @@ This Data Release (v1) focuses on a limited set of data products generated with 
 \section{Table Schema}
 
 \subsection{Object Table Schema}
+\label{app:object-schema}
 \input{tables/schema_object}
 
 \bigskip
 
 \subsection{Truth-match Table Schema}
+\label{app:truth-schema}
 \input{tables/schema_truth}
 
 
