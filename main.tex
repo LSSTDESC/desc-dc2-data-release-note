@@ -1,100 +1,62 @@
-% ====================================================================
-%
-% LSST DESC DC2 Data Release Note
-%
-% ====================================================================
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
+\documentclass[modern]{descnote}
+\pdfoutput=1 %for arXiv submission
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage[english]{babel}
+\usepackage{amsmath,amstext}
+\usepackage[figure,figure*]{hypcap}
+\usepackage{threeparttablex}
+\usepackage{longtable}
+\usepackage{inconsolata}
 
-\documentclass[11pt]{report}
+\definecolor{DESCred}{rgb}{0.63,0.00,0.20}
+\hypersetup{colorlinks=true,breaklinks=true,
+  citecolor=DESCred,filecolor=DESCred,linkcolor=DESCred,urlcolor=DESCred}
 
-\include{inc/doc_settings} % formatting for doc, copied from SRM
+%figure path
+\graphicspath{{figs/}}
 
-\include{inc/macros}       % commands and abbreviations, adapted from SRM doc_macros.tex
+% for \autoref
+\renewcommand*\sectionautorefname{Section}
+\renewcommand*\subsectionautorefname{Section}
+\renewcommand*\subsubsectionautorefname{Section}
 
-% ====================================================================
-\usepackage{float,longtable,threeparttablex,booktabs}
+%%%%% Custom commands %%%%%%
+
+% For creating hyperlinks
+\newcommand*{\https}[1]{\href{https://#1}{\nolinkurl{#1}}}
+\newcommand*{\http}[1]{\href{http://#1}{\nolinkurl{#1}}}
+
+% Other useful commands
+\DeclareUrlCommand\code{\urlstyle{tt}}
+
+% Commands for editing and revisions
+\newcommand{\todo}[1]{\textcolor{orange}{#1}}
+
+
+%%%%% Front Matter %%%%%%
+
+\shorttitle{DESC DC2 Data Release Note}
+\shortauthors{LSST~DESC}
 
 \begin{document}
-\pagenumbering{gobble}
+\title{DESC DC2 Data Release Note}
+\input{authors}
 
-%%%%% TITLE PAGE
-\pagestyle{empty}
-
-\vspace*{0.2\textheight}
-
-\begin{center}
-{\Huge\bfseries The Rubin Observatory LSST Dark Energy Science Collaboration (DESC)\\
-\bigskip DC2 Data Release Note}
-
-\vspace*{0.2\textheight}
-
-\input{commitID.tex}
-
-\vspace*{0.1\textheight}
-
-\begin{figure}[!h]
-\centering\includegraphics[width=5cm,angle=0]{inc/desc-logo.png}
-\end{figure}
-
-\end{center}
-
-% %%%%% VERSION HISTORY
+\begin{abstract}
+%\clearpage
+%
+Abstract text
+%
 \clearpage
-\include{inc/version}
+\end{abstract}
+
+\tableofcontents
 
 \clearpage
-
-\phantomsection\section*{Contributors}
-% Force the Contributor listing to show up in the TOC even though it's a section*:
-\addcontentsline{toc}{section}{Contributors}
-
-\input{inc/contributions.tex}
-
-
-% %%%%% TABLE OF CONTENTS
-\clearpage
-{\let\cleardoublepage\clearpage}
-
-\vspace*{-1.0in}
-\maketoc
-\label{toc}
-
-\clearpage
-
-%%%%%%%% FOOTER
-\pagestyle{fancy}
-\fancyfoot{} % clear all footer fields
-\fancyfoot[R]{\thepage}  % page number in "outer" position of footer line
-% \fancyfoot[L]{\footernavigationbar}  % navigation to contents etc
-
-%%%%%%%% HEADER
-\fancyhead[L]{}
-\fancyhead[R]{LSST DESC DC2 Data Release}
-\renewcommand{\footrulewidth}{1pt}
-
-\setlength\parindent{0em}
-\setlength{\parskip}{0.5em}
-% ====================================================================
-
-% % FRONT MATTER
-% \renewcommand{\thepage}{\roman{page}}% Roman numerals for page counter
-% \setcounter{page}{0}
-
-% ====================================================================
-
-\renewcommand{\thepage}{\arabic{page}}
-\setcounter{page}{1}
-
-\renewcommand\thefigure{\arabic{figure}}
-\setcounter{figure}{0}
-
-% ====================================================================
-
-\phantomsection\section*{Executive Summary and Quick Start Guide}
-% Force the Executive Summary to show up in the TOC even though it's a section*:
-\addcontentsline{toc}{section}{Executive Summary and Quick Start Guide}
-
-
-
 
 \section{Introduction}
 
@@ -141,7 +103,6 @@ The Object Table contains information about static astronomical objects measured
 The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipeline produces the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles the Rubin LSST Data Products Definition Document (LSE-163) for the end users. 
 
 Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectID}). There are no duplicated entries in the Object Table. For details about the physical representation of the Object Table, see \autoref{sec:representation}. The table below lists the Object Table schema. 
-\input{inc/schema_object}
 
 \subsection{Truth-match Table}
 \label{sec:truth}
@@ -162,8 +123,6 @@ These selections are particularly important for users who wish to access the fil
 
 
 The physical representation of the Truth-match Table is described in \autoref{sec:representation}. The table below lists the Truth-match Table schema.
-
-\input{inc/schema_truth}
 
 
 
@@ -200,84 +159,6 @@ Each data table is further partitioned into several files that correspond to dif
 \section{Example Notebooks}
 \label{sec:notebooks}
 
-% \section{Validation and Characterization}
-% \label{sec:validation}
-
-% \note{MWV: I started this section, but maybe all of this stuff should go in a different paper.  We presented a few things in the DC2 Paper, and we're not going to be exhaustive here.  But I'm in favor of putting something that characterizes the data products in a Note describing the data products.
-% We also might want to highlight known things that might otherwise trigger immediate questions.  E.g., the discreteness of the M-type stellar models.}
-
-% \note{YYM: Some of this characterization should go into Sec 2 ``Major Features''}
-
-% \note{MWV: Maybe another more minimally disruptive direction to go would be to include a rendered copy of the Object Table Validation notebook, \code{validate_dc2_run2.2i_object_table.ipynb}, under the Example Notebooks or as an appendix.  Can add the tests Plaszczynski has been doing to this Notebook to help complete things.}
-
-% \note{MWV: 2020-12-15 08:31 EST --  OK.  I didn't get anything extra done last week, so I'll agree that we should remove this "Validation and Characterization" section and go with elements of the Object Table validation notebooks in the examples and mention the discrete M-star models in Section 2.  I've commented out this section.}
-
-% \subsection{Tests of the Object Table}
-
-% These tests can be asked of any coadd catalog from real or simulated data.
-
-% \begin{itemize}
-%   \item Do we cover the RA and Dec as expected
-%   \item Are stars point-like and galaxies extended?
-%   \item Is the distribution of measured PSFs reasonable.  Note that this is on the coadds for the current level of processing, but the coadds should be representative of the distribution of PSFs from the input images.
-%   \item Does a color-color diagram of stars look reasonable?
-%   \item Are the image 5-sigma point-source depths reasonable?
-%   \item Is the areal density of galaxies on the sky reasonable?
-%       \begin{itemize}
-%           \item Check both versus other surveys using real data of the real sky. 
-%       \end{itemize}
-%   \item Is the number density of galaxies vs. brightness (say i band magnitude) reasonable?
-%       \begin{itemize}
-%           \item Check both versus other surveys using real data of the real sky. 
-%       \end{itemize}
-%   \item Is the separation of stars vs. galaxies decent.  Does it behave as expected as a function of SNR?  Are there unexpected features?
-%   \item Is the distribution of shape, ellipticity, and T second moments reasonable and as expected?
-%   \item Is the distribution of [shear-based] e1, e2, $e_\text{abs}$ reasonable?  Are there patterns in the distribution across the sky?
-%   \item What's the relationship between different types of extended-object photometry?
-%   \item Do Central Cluster galaxies follow the red sequence?
-%   \begin{itemize}
-%       \item Is the cluster red sequence visible in z vs. g-r and r-z vs. g-r plots of extended objects in the data?
-%       \item If you run a cluster finder, and then identify central galaxies, do you find that the expected central cluster galaxy red sequence pops out clearly?
-%   \end{itemize}
-
-% \end{itemize}
-
-% \subsection{Comparison of the Object Table with Truth}
-
-% Comparison against the known characteristics of the models without matching:
-
-% \begin{itemize}
-%   \item Does the areal density of stars match the input model of the Milky Way?
-%   \item Does the number density of galaxies vs. brightness (say i band magnitude) match the input model?
-% \end{itemize}
-
-% The following questions can only be asked after matching the observered catalog to the truth catalogs.
-
-% \begin{itemize}
-%   \item Observed - Truth magnitude
-%   \begin{itemize}
-%       \item For stars, galaxies.  Point source and extended model photometry.
-%       \item Is the distribution centered at 0?
-%       \item Is it symmetric or skewed?
-%       \item Is the skew consistent with (reverse) Malmquist bias at bright end?
-%       \item As a function of brightness.
-%         \item Does the scatter at the low SNR end follow the reported uncertainties?
-%         \item What happens at the bright end? Are the effects of saturation visible?
-%       \item Is a constant offset?  If so, is it consistent with a bookkeeping error somewhere?
-%       \item What's the behavior for a SNR > 10 cut.
-%   \end{itemize}
-
-%   \item Galaxies
-%   \begin{itemize}
-%       \item Do Central Cluster galaxies follow the red sequence?
-%         \item Look in r-z vs g-r
-%         \item This can be done using the truth catalog identify cluster members.  And the presented matched plots
-%         \item Compare truth 
-%         \item data vs. redshift
-%         \item Compare truth -data vs. g-r color.
-%         \item This analysis complements the data-only analysis above.
-%     \end{itemize}
-% \end{itemize}
 
 \section{Conclusion and Outlook}
 \label{sec:outlook}
@@ -287,41 +168,47 @@ In this note we described the first public data release for DC2 carried out by t
 This Data Release (v1) focuses on a limited set of data products generated with the LSST Science Pipelines. In the future, we plan to extend this data release in several directions. First, LSST DESC is currently working on generating so-called ``add-on'' catalogs. These catalogs provide additional information obtained from further processing the data. Examples include a photo-z catalog and a cluster catalog. Once these catalogs have been carefully validated and are of sufficient quality to be of broader interest, they will be added to the DC2 Data Release. Second, the processing of the DDF portion of DC2 is still in progress. As explained in more detail in~\cite{2020arXiv201005926L}, the DDF region contains several astrophysical components, e.g.~AGNs, that are not available in the WFD region. As with the add-on catalogs, once careful validation has concluded, we plan to make those data available as well. Finally, for cosmology it is very informative to compare results from different data releases to build a better understanding of the impact of the deepth of the data on cosmological constraints. Therefore, LSST DESC is currently generating additional data releases, DR2 and DR3. Depending on the feedback we receive, these datasets will become part of future public data releases as well.
 
 
+%%%%%% Appendices %%%%%% 
+\clearpage
+\appendix
+\section{Changelog}
+\input{tables/changelog}
+
 \clearpage
 
-\phantomsection\section*{Acknowledgments}
+\section{Table Schema}
+
+\subsection{Object Table Schema}
+\input{tables/schema_object}
+
+\bigskip
+
+\subsection{Truth-match Table Schema}
+\input{tables/schema_truth}
+
+
+%%%%%% Acknowledgments %%%%%% 
+\clearpage
+\section*{Acknowledgments}
+\phantomsection
 \addcontentsline{toc}{section}{Acknowledgements}
 
-\input{desc-tex/ack/standard.tex}
+\input{desc_ack_standard.tex}
 
 % Individual acknowledgments (sorted by author order)
 The work of APH, KH, EK, PL, and ASV at Argonne National Laboratory was supported under the U.S. DOE contract DE-AC02-06CH11357.
 Support for YYM was provided by NASA through the NASA Hubble Fellowship grant no.\ HST-HF2-51441.001 awarded by the Space Telescope Science Institute, which is operated by the Association of Universities for Research in Astronomy, Incorporated, under NASA contract NAS5-26555. 
 
+% Contribution statements
 
 
-% %%%%%%%% END MATTER
+
+%%%%%% References %%%%%% 
 \clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
 
-
-\bibliographystyle{inc/apj-mod}
-\phantomsection\bibliography{ref}
-
-
-\clearpage
-\appendix
-\renewcommand\thefigure{\thesection\arabic{figure}}
-\renewcommand\thetable{\thesection\arabic{table}}
-\renewcommand{\thesection}{\Alph{section}}
-\renewcommand{\thesubsection}{\Alph{section}\arabic{subsection}}
-
-\phantomsection\section*{Appendices}
-\addcontentsline{toc}{section}{Appendices}
-
-
-
-
+\bibliographystyle{aasjournal}
+\bibliography{ref}
 
 \end{document}
-
-% ====================================================================
