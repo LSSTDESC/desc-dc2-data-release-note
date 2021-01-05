@@ -16,7 +16,7 @@
 \hypersetup{colorlinks=true,breaklinks=true,
   citecolor=DESCred,filecolor=DESCred,linkcolor=DESCred,urlcolor=DESCred}
 
-%figure path
+%figure pathhttps://www.overleaf.com/project/5fc85a437ab1bf2161bc7294
 \graphicspath{{figs/}}
 
 % for \autoref
@@ -66,9 +66,10 @@ The data challenges have been designed to mimic actual data from the Rubin Obser
 
 Both LSST DESC data challenges are based on realistic simulations of the extragalactic sky and employ a comprehensive image simulation library with a range of features, imSim. The resulting synthetic data were processed with Rubin's LSST Science Pipelines~\citep{2017ASPC..512..279J} to generate the final data products. The first data challenge, DC1, covers a $\sim$40 deg$^2$ area and ten years of observations. The image simulations were carried out for $r$-band only. A detailed description and a range of analysis results are provided in~\cite{dc1}.  In this data release note, we focus on the second data challenge, DC2. A comprehensive description of the LSST DESC DC2 Simulated Sky Survey can be found in~\cite{2020arXiv201005926L}. DC2 covers $\sim$300 deg$^2$ in the wide-fast-deep (WFD) area to be surveyed by LSST. Within this area, a small 1~deg$^2$ deep-drilling field (DDF) has been simulated as well. For the data release described in this note, only data from the WFD campaign and 5 years of observations are provided, corresponding to the planned sixth Rubin data release, DR6. For DC2, all six optical bands $ugrizy$ are included in the image simulations. The simulations, both for the extragalactic catalog and image generation, have many features that are relevant and realistic. However, given the complexity of the actual data and finite resources available, some features are less realistic or simply omitted. \cite{2020arXiv201005926L} provide a comprehensive discussion about the DC2 design choices that have been guided mostly by considerations regarding cosmological probes.  
 
-For LSST DESC, the data challenges serve multiple purposes. The advantage of simulated data is that the underlying truth is known. Therefore, even if they are not as complex as observational data or have different systematics, they provide an excellent testbed for DESC analysis pipelines. Given that the data formats closely mimic the Rubin data products, they also serve to aid the development and optimization of data access methods. The data challenges also offer the opportunity to exercise the LSST Science Pipelines and investigate their performance, in particular with regard to how systematic effects in the data are handled. By making a first set of the data products publicly available, we hope that other LSST Science Collaborations will be able to carry out useful tests for their data arrival preparation as well. In addition, the data should be of value for the broader optical astronomy and cosmology community.
+For LSST DESC, the data challenges serve multiple purposes. The advantage of simulated data is that the underlying truth is known. Therefore, even if they are not as complex as observational data or have different systematics, they provide an excellent testbed for DESC analysis pipelines. Given that the data formats closely mimic the Rubin data products, they also serve to aid the development and optimization of data access methods. The data challenges also offer the opportunity to exercise the LSST Science Pipelines and investigate their performance, in particular with regard to how systematic effects in the data are handled. By making a first set of the data products publicly available, we hope that other LSST Science Collaborations will be able to carry out useful tests as part of preparations for data arrival preparation as well. In addition, the data should be of value for the broader optical astronomy and cosmology community.
 
-This note is organized as follows. In~\autoref{sec:features} we describe the major features of the DC2 data set. We provide an overview of the data products that are part of this release in~\autoref{sec:products}. We provide instructions for how to access the data in~\autoref{sec:access}. Together with the data itself, we release a set of selected notebooks that contain examples for common data analysis tasks. The notebooks are introduced in~\autoref{sec:notebooks}.
+This note is organized as follows. In~\autoref{sec:features} we describe the major features of the DC2 data set. We provide an overview of the data products that are part of this release in~\autoref{sec:products}. We provide instructions for data access, including a set of example Python Jupyter notebooks, in~\autoref{sec:access}.
+%Together with the data itself, we release a set of selected notebooks that contain examples for common data analysis tasks. The notebooks are introduced in~\autoref{sec:notebooks}.
 %In Section~\autoref{sec:validation} we present our validation and characterization of the DC2 data products.
 We conclude in~\autoref{sec:outlook} and provide a brief description of possible future data releases. 
 
@@ -100,18 +101,18 @@ This Data Release (v1) provides the data from the WFD campaign for 5 years of ob
 \subsection{Object Table}
 \label{sec:object}
 
-The Object Table contains information about static astronomical objects measured on a stacked (coadd) image. The photometry in the Object Table is measured with the forced photometry method, i.e., it is consistently measured across multiple bands using a fixed position, which is determined from the reference filter for each source (the filter that best measures the source). 
+The Object Table contains information about static astronomical objects measured on a stacked (coadd) image. The photometry in the Object Table is measured with the forced photometry method, i.e., it is consistently measured across multiple bands using a fixed position, which is determined from the reference band for each source \citep[Sec.~3.4 of][]{10.1093/pasj/psx080}. 
 
-The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipeline produces the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles the Rubin LSST Data Products Definition Document (LSE-163) for the end users. 
+The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipelines (v19) produce the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles the Rubin LSST Data Products Definition Document (LSE-163; \https{lse-163.lsst.io}) for the end users. 
 
 Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectID}). There are no duplicated entries in the Object Table. For details about the physical representation of the Object Table, see \autoref{sec:representation}. The full schema for the Object Table can be found in \autoref{app:object-schema}. 
 
 \subsection{Truth-match Table}
 \label{sec:truth}
 
-The Truth-match Table is a joint representation of both the truth information (i.e., the measurable fluxes of astronomical objects that serve as input values to the image simulations) and their best matches to the measured objects in the Object Table. The Truth-match Table allows users to examine, for example, the differences between true and measured fluxes and positions, and compare to the expected levels of photometric and astrometric accuracy and precision.
+The Truth-match Table is a joint representation of both the truth information (i.e., the measurable fluxes and positions of astronomical objects that serve as input values to the image simulations) and their best matches to the measured objects in the Object Table. The Truth-match Table allows users to examine, for example, the differences between true and measured fluxes and positions, and compare to the expected levels of photometric and astrometric accuracy and precision.
 
-The generation of the Truth-match Table is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. The truth information in the Truth-match Table only includes ``summary'' properties (i.e., static, or infinite-time averaged fluxes) of galaxies (including infinite-time averaged AGN components), stars, and supernovae (SNe). Time-varying properties are not included. The match information stored in the  Truth-match Table is produced with the following procedure: For each entry in the Object Table:
+The generation of the Truth-match Table is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. The truth information in the Truth-match Table only includes ``summary'' properties (i.e., static, or infinite-time averaged fluxes) of galaxies (including infinite-time averaged AGN components \todo{check with Joanne}), stars, and supernovae (SNe). Time-varying properties are not included. The match information stored in the  Truth-match Table is produced with the following procedure applied for each entry in the Object Table:
 \begin{enumerate}
     \item Search for all truth entries that are within 1~arcsec and have a $r$-band magnitude difference ($\Delta r$) less than 1~mag. If one or more truth entries that satisfy these criteria are found, pick the truth entry that has the smallest $|\Delta r|$ as the match, and set \code{is_good_match} to True.
     \item If no truth entry was found in Step (1), pick the truth entry that is the nearest neighbor of the object entry on sky as the match, and set \code{is_good_match} to False.
@@ -135,10 +136,10 @@ The physical representation of the Truth-match Table is described in \autoref{se
 \label{sec:representation}
 
 All data tables in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available for multiple development systems. 
-The data files can be easily downloaded to the user's machine via Globus Online (\autoref{sec:download}), and read with Python packages such as \code{pyarrow} or \code{fastparquet}.
+The data files can be easily downloaded to the user's machine via Globus (\autoref{sec:download}), and read with Python packages such as \code{pyarrow} or \code{fastparquet}.
 We additionally provide a Python package, \code{GCRCatalogs}, which contains a high-level user API to access the data files (\autoref{sec:gcr}). 
 
-Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Pipeline.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; i.e., an entry that is near the tract boundary still only appears in the tract it belongs to. Each Parquet file contains only one partition (row group). 
+Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Science Pipelines.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; i.e., an entry that is near the tract boundary still only appears in the tract it belongs to. Each Parquet file contains only one partition (row group). 
 
 \begin{figure}[tbh!]
     \centering
@@ -149,22 +150,23 @@ Each data table is further partitioned into several files that correspond to dif
 
 
 
-\subsection{Obtaining Data Files via Globus Online}
+\subsection{Downloading Data Files}
 \label{sec:download}
 
-\subsection{Accessing Data Files via GCRCatalogs}
+\subsection{Accessing Data in Python}
 \label{sec:gcr}
 
 
-
-\section{Example Notebooks}
+\subsection{Example Python Jupyter Notebook}
 \label{sec:notebooks}
 
+We provide two example Python Jupyter Notebooks to demonstrate how to use \code{GCRCatalogs} to access the data, explain the data model, and show a few simple analyses that can be used as starting points for further development. 
+These Jupyter Notebooks can be found in the associated GitHub repository.\footnote{\url{https://github.com/LSSTDESC/DC2-Public-Release}}
 
 \section{Conclusion and Outlook}
 \label{sec:outlook}
 
-In this note we described the first public data release for DC2 carried out by the LSST DESC. We make data available for a simulated WFD survey spanning 300 degree$^2$ and 5 years of Rubin observations, including a subset of the coadd-based catalogs that would be included in Rubin Observatory's DR6. We provided a brief overview of the major features of the data set in~\autoref{sec:features} and a detailed description of the available products in~\autoref{sec:products}. The data can be accessed via a web-portal that offers a convenient interface for data transfers using Globus as described in~\autoref{sec:access}. In order to enable first quick experiments, we also release a set of example notebooks, as described in~\autoref{sec:notebooks}. We encourage new users to provide feedback and ask questions via a dedicated Github repository.\footnote{\url{https://github.com/LSSTDESC/DC2-Public-Release}}
+In this note we described the first public data release for DC2 carried out by the LSST DESC. We make data available for a simulated WFD survey spanning 300 degree$^2$ and 5 years of Rubin observations, including a subset of the coadd-based catalogs that would be included in Rubin Observatory's DR6. We provided a brief overview of the major features of the data set in~\autoref{sec:features} and a detailed description of the available products in~\autoref{sec:products}. The data can be accessed via a web-portal that offers a convenient interface for data transfers using Globus as described in~\autoref{sec:access}. In order to enable first quick experiments, we also release a set of example notebooks, as described in~\autoref{sec:notebooks}. We encourage new users to provide feedback and ask questions via a dedicated GitHub repository.\footnote{\url{https://github.com/LSSTDESC/DC2-Public-Release}}
 
 This Data Release (v1) focuses on a limited set of data products generated with the LSST Science Pipelines. In the future, we plan to extend this data release in several directions. First, LSST DESC is currently working on generating so-called ``add-on'' catalogs. These catalogs provide additional information obtained from further processing the data. Examples include a photo-z catalog and a cluster catalog. Once these catalogs have been carefully validated and are of sufficient quality to be of broader interest, they will be added to the DC2 Data Release. Second, the processing of the DDF portion of DC2 is still in progress. As explained in more detail in~\cite{2020arXiv201005926L}, the DDF region contains several astrophysical components, e.g.~AGNs, that are not available in the WFD region. As with the add-on catalogs, once careful validation has concluded, we plan to make those data available as well. Finally, for cosmology it is very informative to compare results from different data releases to build a better understanding of the impact of the depth of the data on cosmological constraints. Therefore, LSST DESC is currently generating additional coadds and associated catalogs for subsets of the data corresponding to 1- and 2-year depth. Depending on the feedback we receive, these datasets will become part of future public data releases as well.
 
