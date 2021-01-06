@@ -209,51 +209,51 @@ Support for YYM was provided by NASA through the NASA Hubble Fellowship grant no
 %% The contributions from the authors are listed below in alphabetical order.
 BA investigated variations in the sky model across the focal plane in imSim.
 %
-HA implemented the dithers and extracted the visit lists (and sensors for Run1) for the simulations.
+HA implemented the dithers and extracted the visit lists for the simulations.
 %
 YNB worked on the design and implementation of the imSim workflow and developed extensions to Parsl to meet the performance and scalability needs of the imSim workflow.
 %
-FEB contributed to the development and testing of the AGN model, as well as to the text of the paper.
+FEB contributed to the development and testing of the AGN model.
 %
-GB managed the European computational grid work for Run~1.2i and Run~2.1i.
+GB managed the European computational grid work for DC2.
 %
-RB conceptualized the interaction of Time Domain Science implementations with existing middleware software, compiled scientific desiderata for SN group, developed the implemented the code and the SN population along with their assignment to cosmoDC2 host galaxies, the cadence selection and contributed to the validation of SN, the planning and requirements for strong lensing injection, helped with validation of SN done by JWP, DS, RH, SJ and the text on SN.
+RB conceptualized the interaction of Time Domain Science implementations with existing middleware software, compiled scientific desiderata for SN group, developed the implemented the code and the SN population along with their assignment to cosmoDC2 host galaxies, the cadence selection and contributed to the validation of SN, the planning and requirements for strong lensing injection, helped with validation of SN done by JWP, DS, RH, and SJ.
 %
-JRB is responsible for creation of and access to the PostgreSQL database.
+JRB contributed to production of the truth catalogs and to the software package GCRCatalogs.
 %
 DB contributed to the the image processing pipeline configuration, deployment and tuning at CC-IN2P3 and to the validation of the various data products.
 % 
-KC Contributed to the simulation and data processing workflows and Globus distribution portal
+KC contributed to the simulation and data processing workflows and Globus distribution portal.
 %
 JC worked on imSim development, image validation, image processing development and debugging, and calibration product generation.
 %
 JCT was responsible for the definition, implementation, and deployment of the SRS pipeline at CC-IN2P3.
 %
-AJC led the development of the LSST simulation tools and contributed to the initial definition of the DESC data challenges and to the text of the paper.
+AJC led the development of the LSST simulation tools and contributed to the initial definition of the DESC data challenges.
 %
 ADW developed the LSST DESC exposure checker and organized the DC2 visual inspection effort.
 %
 RD assisted in organization, planning and obtaining computing resources.
 %
-SFD developed and ran the middleware connecting the cosmological simulations with the image simulator, including the injection of variable and transient sources according to models provided by RB and JBK.
+SFD helped design and implement the stellar and AGN variability models. He also implemented and maintained the interface between the cosmoDC2 simulations, the GalFast simulations, and ImSim.
 %
-SWD edited the paper text.
+SWD edited the note text.
 %
-EG contributed to the field location and dither design and edited the paper text.
+EG contributed to the field location and dither design.
 %
-TG adapted PhoSim to HPC at NERSC; carried out extensive PhoSim testing; designed, implemented and ran workflows which produced the DC2 Run~1.2p data, worked on the production of certain calibration products, and assisted with management of DESC NERSC resources.
+TG worked on the production of certain calibration products, and assisted with management of DESC NERSC resources.
 %
-SH is the HACC team lead; he contributed to the assessment of image generation computational requirements, co-led the management of DESC NERSC resources, and contributed to the text of the paper.
+SH is the HACC team lead; he contributed to the assessment of image generation computational requirements, co-led the management of DESC NERSC resources.
 %
-APH led the development of the model for the extragalactic catalog.
+APH helped design and build the model of the galaxy-halo connection used to generate the cosmoDC2 extragalactic catalog. 
 %
-KH was responsible for the overall organization of the project, was deeply involved in many aspects of the extragalactic catalog production, and contributed to the text of the paper.
+KH was responsible for the overall organization of the DC2 project, was involved in many aspects of the extragalactic catalog production, and contributed to the text of the note.
 %
 FH implemented the mechanism for making the LSST Science Pipelines available online and usable both at CC-IN2P3 and at NERSC, managed the CC-IN2P3 data processing infrastructure used by the image processing pipeline and was responsible for the prompt data transfer between CC-IN2P3 and NERSC.
 %
 RH worked on the coordination and testing of simulated SN inside DC2, draft reading and editing.
 %
-JH was a core member of the extragalactic catalog production team, and created workflow figures for the paper.
+JH was a core member of the extragalactic catalog production team.
 %
 MJ contributed significant portions of code to both the GalSim and ImSim code bases for the purposes of generating the DC2 images.  He also contributed to the simulation design, especially decisions about which features should be included to achieve the desired goals of realism in the galaxy shapes for weak lensing science, while maintaining computational feasibility.
 %
@@ -261,7 +261,7 @@ JBK was the main developer of the SL Sprinkler that inserted strongly lensed AGN
 %
 HMK co-chaired the DM-DC2 task force which coordinated the DESC DM processing of the DC2 image simulation data, produced required calibration products, and managed the DESC software and data resources at NERSC.
 %
-EK contributed extensively to the production and validation of the extragalactic catalog, worked on the interface of the catalog with the image simulations and contributed to the text of the paper.
+EK was one of the principal developers of the extragalactic catalog that was used as input to the image simulations and also worked on the validation of the DC2 object catalogs, as described in the DC2 survey paper.
 %
 DK led the development of the model underlying the extragalactic catalog.
 %
@@ -279,15 +279,15 @@ EPL made contributions to the sky model in imSim.
 %
 RHL contributed to the validation of the final data catalogs and provided support in using the LSST Science Pipelines.
 %
-RM organized analysis teams and synthesized input that factored into the overall DC2 design and validation, was engaged in the validation efforts, and contributed to the text of the paper. 
+RM organized analysis teams and synthesized input that factored into the overall DC2 design and validation, was engaged in the validation efforts, and edited the note text. 
 %
-YYM contributed to the generation and validation of various DC2 data products, co-led the effort for internal data access and DESC Science Platform, and contributed to the text of the paper.
+YYM contributed to the generation, validation, and access of various DC2 data products, the preparation of public release, and text of this note.
 %
-PJM helped design the survey regions and cadences, provided high-level scientific oversight, and contributed to the strong lensing requirements section of the paper.
+PJM helped design the survey regions and cadences, provided high-level scientific oversight, and contributed to defining the strong lensing requirements.
 %
-JEM implemented the atmospheric model in imSim and helped validate the composite PSF model.
+JEM helped develop and validate the PSF simulation within imSim.
 %
-JWP contributed to the validation of AGN variability and SNe, implemented the \text{Sprinkler} modules for rendering postage-stamp images of strongly lensed SNe and AGN and generating the lensing truth tables, and contributed to the text of the paper.
+JWP contributed to the generation and documentation for the truth tables of strongly lensed SNe and AGN.
 %
 JP contributes to write notebooks using Apache Spark to access and manipulate the DC2 data.
 %
@@ -301,7 +301,7 @@ AP contributed to many aspects of the underlying extragalactic catalog, signific
 %
 ESR contributed coverage mapping, processing QA for missing tracts, and galaxy color QA.
 %
-FJS carried out early planning for DC2, performed validation and verification, and contributed to the text of paper and figures.
+FJS participated in DC2 design phase, and production. Participated in catalog validation and matching between object and truth catalog.
 %
 SJS wrote the text for the photometric redshifts section.
 %
@@ -309,7 +309,7 @@ TDU made initial profiling runs of Phosim to characterize performance on KNLs, a
 %i
 ASV was responsible for early generation of instance catalogs, implementing the Parsl workflow for imSim on NERSC and ALCF resources, helping in initial validation of these outputs, and contributing to the text of the paper
 %
-CWW carried out early planning for DC2, worked on development, testing and management of the imSim image simulation program, and contributed to the text of the paper.
+CWW carried out early planning for DC2, worked on development, testing and management of the imSim image simulation program, contributed to the text of the DC2 paper, and tested the released data product format.
 %
 MPW implemented the code to add lensed host galaxies to the lensed AGN and lensed SNe in the DC2 code.
 %
