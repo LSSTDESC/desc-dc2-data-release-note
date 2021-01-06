@@ -166,7 +166,7 @@ These Jupyter Notebooks can be found in the associated GitHub repository.\footno
 \section{Conclusion and Outlook}
 \label{sec:outlook}
 
-In this note we described the first public data release for DC2 carried out by the LSST DESC. We make data available for a simulated WFD survey spanning 300 degree$^2$ and 5 years of Rubin observations, including a subset of the coadd-based catalogs that would be included in Rubin Observatory's DR6. We provided a brief overview of the major features of the data set in~\autoref{sec:features} and a detailed description of the available products in~\autoref{sec:products}. The data can be accessed via a web-portal that offers a convenient interface for data transfers using Globus as described in~\autoref{sec:access}. In order to enable first quick experiments, we also release a set of example notebooks, as described in~\autoref{sec:notebooks}. We encourage new users to provide feedback and ask questions via a dedicated GitHub repository.\footnote{\url{https://github.com/LSSTDESC/DC2-Public-Release}}
+In this note we described the first public data release for DC2 carried out by the LSST DESC. We make data available for a simulated WFD survey spanning 300 degree$^2$ and 5 years of Rubin observations, including a subset of the coadd-based catalogs that would be included in Rubin Observatory's DR6. We provided a brief overview of the major features of the data set in~\autoref{sec:features} and a detailed description of the available products in~\autoref{sec:products}. The data can be accessed via a web-portal that offers a convenient interface for data transfers using Globus, and we also release a set of example notebooks to enable first quick experiments, as described in~\autoref{sec:access}. We encourage new users to provide feedback and ask questions via a dedicated GitHub repository.\footnote{\url{https://github.com/LSSTDESC/DC2-Public-Release}}
 
 This Data Release (v1) focuses on a limited set of data products generated with the LSST Science Pipelines. In the future, we plan to extend this data release in several directions. First, LSST DESC is currently working on generating so-called ``add-on'' catalogs. These catalogs provide additional information obtained from further processing the data. Examples include a photo-z catalog and a cluster catalog. Once these catalogs have been carefully validated and are of sufficient quality to be of broader interest, they will be added to the DC2 Data Release. Second, the processing of the DDF portion of DC2 is still in progress. As explained in more detail in~\cite{2020arXiv201005926L}, the DDF region contains several astrophysical components, e.g.~AGNs, that are not available in the WFD region. As with the add-on catalogs, once careful validation has concluded, we plan to make those data available as well. Finally, for cosmology it is very informative to compare results from different data releases to build a better understanding of the impact of the depth of the data on cosmological constraints. Therefore, LSST DESC is currently generating additional coadds and associated catalogs for subsets of the data corresponding to 1- and 2-year depth. Depending on the feedback we receive, these datasets will become part of future public data releases as well.
 
@@ -206,7 +206,115 @@ Support for YYM was provided by NASA through the NASA Hubble Fellowship grant no
 
 % Contribution statements
 
-
+%% The contributions from the authors are listed below in alphabetical order.
+BA investigated variations in the sky model across the focal plane in imSim.
+%
+HA implemented the dithers and extracted the visit lists (and sensors for Run1) for the simulations.
+%
+YNB worked on the design and implementation of the imSim workflow and developed extensions to Parsl to meet the performance and scalability needs of the imSim workflow.
+%
+FEB contributed to the development and testing of the AGN model, as well as to the text of the paper.
+%
+GB managed the European computational grid work for Run~1.2i and Run~2.1i.
+%
+RB conceptualized the interaction of Time Domain Science implementations with existing middleware software, compiled scientific desiderata for SN group, developed the implemented the code and the SN population along with their assignment to cosmoDC2 host galaxies, the cadence selection and contributed to the validation of SN, the planning and requirements for strong lensing injection, helped with validation of SN done by JWP, DS, RH, SJ and the text on SN.
+%
+JRB is responsible for creation of and access to the PostgreSQL database.
+%
+DB contributed to the the image processing pipeline configuration, deployment and tuning at CC-IN2P3 and to the validation of the various data products.
+% 
+KC Contributed to the simulation and data processing workflows and Globus distribution portal
+%
+JC worked on imSim development, image validation, image processing development and debugging, and calibration product generation.
+%
+JCT was responsible for the definition, implementation, and deployment of the SRS pipeline at CC-IN2P3.
+%
+AJC led the development of the LSST simulation tools and contributed to the initial definition of the DESC data challenges and to the text of the paper.
+%
+ADW developed the LSST DESC exposure checker and organized the DC2 visual inspection effort.
+%
+RD assisted in organization, planning and obtaining computing resources.
+%
+SFD developed and ran the middleware connecting the cosmological simulations with the image simulator, including the injection of variable and transient sources according to models provided by RB and JBK.
+%
+SWD edited the paper text.
+%
+EG contributed to the field location and dither design and edited the paper text.
+%
+TG adapted PhoSim to HPC at NERSC; carried out extensive PhoSim testing; designed, implemented and ran workflows which produced the DC2 Run~1.2p data, worked on the production of certain calibration products, and assisted with management of DESC NERSC resources.
+%
+SH is the HACC team lead; he contributed to the assessment of image generation computational requirements, co-led the management of DESC NERSC resources, and contributed to the text of the paper.
+%
+APH led the development of the model for the extragalactic catalog.
+%
+KH was responsible for the overall organization of the project, was deeply involved in many aspects of the extragalactic catalog production, and contributed to the text of the paper.
+%
+FH implemented the mechanism for making the LSST Science Pipelines available online and usable both at CC-IN2P3 and at NERSC, managed the CC-IN2P3 data processing infrastructure used by the image processing pipeline and was responsible for the prompt data transfer between CC-IN2P3 and NERSC.
+%
+RH worked on the coordination and testing of simulated SN inside DC2, draft reading and editing.
+%
+JH was a core member of the extragalactic catalog production team, and created workflow figures for the paper.
+%
+MJ contributed significant portions of code to both the GalSim and ImSim code bases for the purposes of generating the DC2 images.  He also contributed to the simulation design, especially decisions about which features should be included to achieve the desired goals of realism in the galaxy shapes for weak lensing science, while maintaining computational feasibility.
+%
+JBK was the main developer of the SL Sprinkler that inserted strongly lensed AGN into the instance catalogs and contributed the text of the paper relating to the SL Sprinkler.
+%
+HMK co-chaired the DM-DC2 task force which coordinated the DESC DM processing of the DC2 image simulation data, produced required calibration products, and managed the DESC software and data resources at NERSC.
+%
+EK contributed extensively to the production and validation of the extragalactic catalog, worked on the interface of the catalog with the image simulations and contributed to the text of the paper.
+%
+DK led the development of the model underlying the extragalactic catalog.
+%
+KSK contributed to the conceptual design of the simulated survey including determining which electronic effects to simulate and by association which master calibration products to include.
+%
+FL contributed the model for the knots component included in galaxy light profiles, and the implementation of said model in CatSim and imSim.
+%
+PL made significant contributions to the development of the cosmodc2 extragalactic catalog
+%
+CSL helped develop physical models of the CCD detectors, which allowed physically real simulations of tree rings and the brighter-fatter effect.
+%
+NL contributed to the generation of strongly lensed host galaxies of multiply lensed AGN and SNIa in the strong lensing systems sprinkled in the DDF.
+%
+EPL made contributions to the sky model in imSim. 
+%
+RHL contributed to the validation of the final data catalogs and provided support in using the LSST Science Pipelines.
+%
+RM organized analysis teams and synthesized input that factored into the overall DC2 design and validation, was engaged in the validation efforts, and contributed to the text of the paper. 
+%
+YYM contributed to the generation and validation of various DC2 data products, co-led the effort for internal data access and DESC Science Platform, and contributed to the text of the paper.
+%
+PJM helped design the survey regions and cadences, provided high-level scientific oversight, and contributed to the strong lensing requirements section of the paper.
+%
+JEM implemented the atmospheric model in imSim and helped validate the composite PSF model.
+%
+JWP contributed to the validation of AGN variability and SNe, implemented the \text{Sprinkler} modules for rendering postage-stamp images of strongly lensed SNe and AGN and generating the lensing truth tables, and contributed to the text of the paper.
+%
+JP contributes to write notebooks using Apache Spark to access and manipulate the DC2 data.
+%
+DJP implemented a model for LSST optical effects in imSim, assisted in the development of internal data access tools, contributed to the visual validation of DC2 images, and contributed to the text of the paper.
+%
+JP implemented a system for running imSim on the UK computational grid and used it to perform parts of Run~1.2i and Run~2.1i in Europe.
+%
+SP contributed to the validation of various DC2 data products, and managed the Apache Spark tools at NERSC.
+%
+AP contributed to many aspects of the underlying extragalactic catalog, significantly improved the multi-thread scaling performance of PhoSim, generated PhoSim calibration products, and performed initial studies of using imSim in containers.
+%
+ESR contributed coverage mapping, processing QA for missing tracts, and galaxy color QA.
+%
+FJS carried out early planning for DC2, performed validation and verification, and contributed to the text of paper and figures.
+%
+SJS wrote the text for the photometric redshifts section.
+%
+TDU made initial profiling runs of Phosim to characterize performance on KNLs, and managed execution and postprocessing of imSim for Run~1  on thousands of nodes of Theta and supporting clusters at Argonne.
+%i
+ASV was responsible for early generation of instance catalogs, implementing the Parsl workflow for imSim on NERSC and ALCF resources, helping in initial validation of these outputs, and contributing to the text of the paper
+%
+CWW carried out early planning for DC2, worked on development, testing and management of the imSim image simulation program, and contributed to the text of the paper.
+%
+MPW implemented the code to add lensed host galaxies to the lensed AGN and lensed SNe in the DC2 code.
+%
+MWV co-led the Data Access Task Force to provide DC2 data products to the DESC community and consulted on the LSST Science Pipelines processing of DC2.
+%
 
 %%%%%% References %%%%%% 
 \clearpage
