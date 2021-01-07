@@ -49,9 +49,18 @@
 \begin{abstract}
 %\clearpage
 %
-We have recently created a simulated sky survey in order to prepare for the analysis of the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST) by the LSST DarkEnergy Science Collaboration (LSST DESC). In this Note, we describe the accompanying public data release of the  
-data products for the LSST DESC second data challenge (DC2). The simulated DC2 sky survey covers an area of approximately 300~deg$^2$ in six optical bands over a five year observing period. We provide a brief description of the major features of the available data sets. In order to enable convenient access to the data products, we have developed a web portal connected to Globus data services. The Note provides a description of data access as well as a reference to detailed instructions and,  additionally, two example Python Jupyter Notebooks to aid first interactions with the data. We welcome feedback and questions about the data release via a Github repository.
+To prepare for the analysis of the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST), the LSST Dark Energy Science Collaboration (LSST DESC) undertook a series of large-scale simulation and analysis exercises.
+The second of these, called Data Challenge 2 (DC2), simulated 300~deg$^2$ in the $ugrizy$ LSST filters following the first five years of a reference LSST observing cadence.
+DESC then processed these images with the current state of the LSST Science Pipelines.
+We here make available the processed object catalogs from this effort.
+We provide a web portal connected to Globus data services to enable convenient access to the data products.
+This Note provides a brief description of the major features of the available data sets, a description of data access, a detailed tutorial access and use the data, and two example Python Jupyter Notebooks to help users get started interacting with and analyzing the data.
+We welcome feedback about this data release and encourage questions posted to the GitHub repository for this release.
 %
+
+%We have recently created a simulated sky survey in order to prepare for the analysis of the Vera C. Rubin Observatory Legacy Survey of Space and Time (LSST) by the LSST Dark Energy Science Collaboration (LSST DESC). In this Note, we describe the accompanying public data release of the  
+%data products for the LSST DESC second data challenge (DC2). The simulated DC2 sky survey covers an area of approximately 300~deg$^2$ in six optical bands over a five year observing period. We provide a brief description of the major features of the available data sets. In order to enable convenient access to the data products, we have developed a web portal connected to Globus data services. The Note provides a description of data access as well as a reference to detailed instructions and,  additionally, two example Python Jupyter Notebooks to aid first interactions with the data. We welcome feedback and questions about the data release via a Github repository.
+
 \clearpage
 \end{abstract}
 
@@ -120,7 +129,7 @@ Because the Object Table was used as the reference catalog for the matching proc
 Flags to distinguish these situations are included in the Truth-match Table. 
 Selecting all entries with \code{match_objectId} $> -1$ from the Truth-match Table would result in a subset of Truth-match entries that have exactly the same row order as the entries in the Object Table (and hence may contain duplicated truth entries). On the other hand, selecting all entries with \code{is_unique_truth_entry} being True would produce a subset of Truth-match entries that contains all unique truth entries, including truth entries that have not been chosen as a match.
 These selections are particularly important for users who wish to access the files directly. For users who use GCRCatalogs (\autoref{sec:gcr}), the reader will automatically select the correct rows depending on whether you are loading the Truth Table or the Match Table (see \autoref{sec:notebooks} for examples).
-
+https://www.overleaf.com/project/5fc85a437ab1bf2161bc7294
 The physical representation of the Truth-match Table is described in \autoref{sec:representation}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
 
 
@@ -207,7 +216,7 @@ This Data Release (v1) focuses on a limited set of data products generated with 
 \input{desc_ack_standard.tex}
 
 % Individual acknowledgments (sorted by author order)
-The work of APH, KH, EK, PL, and ASV at Argonne National Laboratory was supported under the U.S. DOE contract DE-AC02-06CH11357.
+The work of SH, APH, KH, JH, EK, DK, PL, TU and ASV at Argonne National Laboratory was supported under the U.S. DOE contract DE-AC02-06CH11357.
 Support for YYM was provided by NASA through the NASA Hubble Fellowship grant no.\ HST-HF2-51441.001 awarded by the Space Telescope Science Institute, which is operated by the Association of Universities for Research in Astronomy, Incorporated, under NASA contract NAS5-26555. 
 
 % Contribution statements
@@ -319,7 +328,7 @@ CWW carried out early planning for DC2, worked on development, testing and manag
 %
 MPW implemented the code to add lensed host galaxies to the lensed AGN and lensed SNe in the DC2 code.
 %
-MWV co-led the Data Access Task Force to provide DC2 data products to the DESC community and consulted on the LSST Science Pipelines processing of DC2.
+MWV co-led the Data Access Task Force, served as the Data Coordinator, and contributed to validation of the DC2 data products.
 %
 
 %%%%%% References %%%%%% 
