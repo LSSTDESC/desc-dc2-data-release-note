@@ -112,7 +112,7 @@ The Object Table contains information about static astronomical objects measured
 
 The generation of the Object Table is described in detail in \S~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipelines (v19) produce the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and apply certain column renaming and translations to produce the final Object Table. The renaming and translations are meant to produce a science-ready catalog that resembles the Rubin LSST Data Products Definition Document (LSE-163; \https{lse-163.lsst.io}) for the end users. 
 
-Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectID}). There are no duplicated entries in the Object Table. For details about the physical representation of the Object Table, see \autoref{sec:representation}. The full schema for the Object Table can be found in \autoref{app:object-schema}. 
+Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectId}). There are no duplicated entries in the Object Table. For details about the file format and the organization of files for the Object Table, see \autoref{sec:representation}. The full schema for the Object Table can be found in \autoref{app:object-schema}. 
 
 \subsection{Truth-match Table}
 \label{sec:truth}
@@ -132,7 +132,7 @@ Flags to distinguish these situations are included in the Truth-match Table.
 Selecting all entries with \code{match_objectId} $> -1$ from the Truth-match Table would result in a subset of Truth-match entries that have exactly the same row order as the entries in the Object Table (and hence may contain duplicated truth entries). On the other hand, selecting all entries with \code{is_unique_truth_entry} being True would produce a subset of Truth-match entries that contains all unique truth entries, including truth entries that have not been chosen as a match.
 These selections are particularly important for users who wish to access the files directly. For users who use GCRCatalogs (\autoref{sec:gcr}), the reader will automatically select the correct rows depending on whether you are loading the Truth Table or the Match Table (see \autoref{sec:notebooks} for examples).
 https://www.overleaf.com/project/5fc85a437ab1bf2161bc7294
-The physical representation of the Truth-match Table is described in \autoref{sec:representation}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
+The file format and the organization of files for the Truth-match Table are described in \autoref{sec:representation}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
 
 
 
@@ -140,14 +140,13 @@ The physical representation of the Truth-match Table is described in \autoref{se
 \label{sec:access}
 
 
-\subsection{Physical Representation of the Data Sets}
+\subsection{Data File Format and Organization}
 \label{sec:representation}
 
 All data tables in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available for multiple development systems. 
 The data files can be easily downloaded to the user's machine via Globus (\autoref{sec:download}), and read with Python packages such as \code{pyarrow} or \code{fastparquet}.
 We additionally provide a Python package, \code{GCRCatalogs}, which contains a high-level user API to access the data files (\autoref{sec:gcr}). 
 
-Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Science Pipelines.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; i.e., an entry that is near the tract boundary still only appears in the tract it belongs to. Each Parquet file contains only one partition (row group). 
 
 \begin{figure}[tbh!]
     \centering
@@ -156,14 +155,17 @@ Each data table is further partitioned into several files that correspond to dif
     \label{fig:skymap}
 \end{figure}
 
+Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Science Pipelines.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} shows a visual representation of the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; i.e., an entry that is near the tract boundary still only appears in the tract it belongs to. Each Parquet file contains only one partition (row group). 
+
+
 
 
 \subsection{Downloading Data Files}
 \label{sec:download}
 
-The data files are made available via a web portal\footnote{lsstdesc-portal.nersc.gov} using Globus\footnote{\https{www.globus.org}} services. Any user can authenticate using their organizational login or with a Globus ID\footnote{https://www.globusid.org/what} can initiate tranf the full or partial data set to another endpoint to which the user has access, should it be a laptop or a high-performance computing center. 
+The data files are made available via a web portal\footnote{lsstdesc-portal.nersc.gov} using Globus\footnote{\https{www.globus.org}} services. Any user can authenticate using their organizational login or with a Globus ID\footnote{https://www.globusid.org/what} to initiate transfers of the full or partial data set to another endpoint to which the user has access, should it be a laptop or a high-performance computing center. 
 
-Please visit our data portal\footnote{\https{lsstdesc-portal.nersc.gov}} to initiate data transfers. Detailed instructions can be found in our Public Release repository.\footnote{\https{github.com/LSSTDESC/DC2-Public-Release}\label{fn:repo}}
+Detailed instructions on data transfers can be found in our Public Release repository.\footnote{\https{github.com/LSSTDESC/DC2-Public-Release}\label{fn:repo}}
 
 \subsection{Accessing Data in Python}
 \label{sec:gcr}
