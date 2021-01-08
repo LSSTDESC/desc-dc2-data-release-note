@@ -11,6 +11,7 @@
 \usepackage{threeparttablex}
 \usepackage{longtable}
 \usepackage{inconsolata}
+\usepackage{minted}
 
 \definecolor{DESCred}{rgb}{0.63,0.00,0.20}
 \hypersetup{colorlinks=true,breaklinks=true,
@@ -94,7 +95,7 @@ Finally, Type Ia supernovae have been added throughout the DC2 region out to a r
 
 \subsection{Image Simulation Features}
 
-DC2 used the \code{minion_1016} observing cadence\footnote{Available at \https{docushare.lsst.org/docushare/dsweb/View/Collection-4604}}, which was the Rubin Observatory LSST baseline cadence when the production work of the DC2 simulations began. This cadence provides the nominal field positions, telescope rotations, and filter selections for each 30-second pointing, as well as predicted seeing, airmass, and sky background components.  We have added random translational and rotational dithering to the nominal pointings in order to make the sky coverage more uniform.
+DC2 used the \code{minion_1016} observing cadence\footnote{Available at \https{docushare.lsst.org/docushare/dsweb/View/Collection-4604}}, which was the Rubin Observatory LSST baseline cadence when the production work of the DC2 simulations began. This cadence provides the nominal field positions, telescope rotations, and filter selections for each 30-second pointing, as well as predicted seeing and airmass.  For the sky background, the LSST sky model is used, which is the ESO sky model with a twilight component added~\citep{2016SPIE.9910E..1AY}.  We have added random translational and rotational dithering to the nominal pointings in order to make the sky coverage more uniform.
 
 The imSim simulation software, which is described in more detail in~\cite{2020arXiv201005926L}, uses the GalSim package \citep{2015A&C....10..121R} to render the astrophysical objects and the night sky.  The point-spread functions (PSFs) for each exposure are computed using a set of atmospheric phase screens that are realizations of Gaussian random fields with a Von Karman power spectrum.  In addition, the PSF calculation includes an optical model of the telescope based on modeling of the active optics system for Rubin Observatory.  After convolution with the PSF, objects are rendered on the LSST CCDs taking into account the instrumental throughput in each band, the object's SED shape within the bandpass, atmospheric effects such as differential chromatic refraction, and the convergence of the incident beam from the telescope optics. GalSim's sensor model includes the brighter-fatter and tree-ring electrostatic effects that are present in the CCDs used in the LSST Camera (LSSTCam).  Finally, electronics readout effects such as bleed trails, CCD segmentation, intra-CCD cross-talk, read noise, etc., are applied.  These effects are based on measurements of the actual LSSTCam hardware.
 
@@ -118,7 +119,7 @@ Each entry (row) in the Object Table corresponds to one measured astronomical ob
 
 The Truth-match Table is a joint representation of both the truth information (i.e., the measurable fluxes and positions of astronomical objects that serve as input values to the image simulations) and their best matches to the measured objects in the Object Table. The Truth-match Table allows users to examine, for example, the differences between true and measured fluxes and positions, and compare to the expected levels of photometric and astrometric accuracy and precision.
 
-The generation of the Truth-match Table is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. The truth information in the Truth-match Table only includes ``summary'' properties (i.e., static, or infinite-time averaged fluxes) of galaxies (including infinite-time averaged AGN components \todo{check with Joanne}), stars, and supernovae (SNe). Time-varying properties are not included. The match information stored in the  Truth-match Table is produced with the following procedure applied for each entry in the Object Table:
+The generation of the Truth-match Table is described in \S\,4.2.1 of \cite{2020arXiv201005926L}. The truth information in the Truth-match Table only includes ``summary'' properties (i.e., static, or infinite-time averaged fluxes) of galaxies, stars, and supernovae (SNe). Time-varying properties are not included. The match information stored in the  Truth-match Table is produced with the following procedure applied for each entry in the Object Table:
 \begin{enumerate}
     \item Search for all truth entries that are within 1~arcsec and have a $r$-band magnitude difference ($\Delta r$) less than 1~mag. If one or more truth entries satisfying these criteria are found, pick the truth entry with the smallest $|\Delta r|$ as the match, and set \code{is_good_match} to True.
     \item If no truth entry was found in Step (1), pick the truth entry that is the nearest neighbor of the object entry on sky as the match, and set \code{is_good_match} to False.
@@ -160,7 +161,7 @@ Each data table is further partitioned into several files that correspond to dif
 \subsection{Downloading Data Files}
 \label{sec:download}
 
-The data files are made available via a Globus\footnote{\https{www.globus.org}} endpoint. Any user with a Globus ID can initiate transfers of the full or partial data set to another endpoint to which the user has access, should it be a laptop or a high-performance computing center. 
+The data files are made available via a web portal\footnote{lsstdesc-portal.nersc.gov} using Globus\footnote{\https{www.globus.org}} services. Any user can authenticate using their organizational login or with a Globus ID\footnote{https://www.globusid.org/what} can initiate tranf the full or partial data set to another endpoint to which the user has access, should it be a laptop or a high-performance computing center. 
 
 Please visit our data portal\footnote{\https{lsstdesc-portal.nersc.gov}} to initiate data transfers. Detailed instructions can be found in our Public Release repository.\footnote{\https{github.com/LSSTDESC/DC2-Public-Release}\label{fn:repo}}
 
@@ -173,12 +174,45 @@ The \code{GCRCatalogs} package is installable by package managers \code{pip} and
 Once installed, the package should be configured to recognize the path to which the data files have been downloaded. The DC2 data set will then be readily available in the user's own Python environment. 
 Detailed instructions can be found in our Public Release repository (see Footnote~\ref{fn:repo}).
 
+Below we show an example Python code snippet to demonstrate how to use \code{GCRCatalogs} to obtain the R.A. and Decl. columns from three tracts of the Object Table, with a sampling rate of 1\%. The high-level user interface makes the code simple and readable. 
+
+\begin{minted}[frame=lines,samepage]{python}
+import GCRCatalogs
+from GCRCatalogs.helpers.tract_catalogs import tract_filter, sample_filter
+
+obj_cat = GCRCatalogs.load_catalog("desc_dc2_run2.2i_dr6_object")
+
+data = obj_cat.get_quantities(
+    quantities=['ra', 'dec'],       # columns we want to load, 
+    filters=[sample_filter(0.01)],  # down sample at 1%
+    native_filters=[tract_filter([4225, 4226, 4430])],  # select 3 tracts
+)
+\end{minted}
 
 \subsection{Example Python Jupyter Notebook}
 \label{sec:notebooks}
 
-We provide two example Python Jupyter Notebooks which demonstrate how to use \code{GCRCatalogs} to access the data, to explain the data model, and to show a few simple analyses that can be used as starting points for further development. 
-These Jupyter Notebooks can be found in the associated GitHub repository (see Footnote~\ref{fn:repo}).
+
+We provide two example Python Jupyter Notebooks which further demonstrate how to use \code{GCRCatalogs} to access the data.
+They are designed to be pedagogical, with clear instructions (see a screenshot in \autoref{fig:notebook}). In addition to demonstrating the access method, these notebooks also explain the data model in detail, and provide a few simple analyses that can be used as starting points for further development (see an example plot in the notebook in \autoref{fig:number_density}).
+These notebooks can be found in the associated GitHub repository (see Footnote~\ref{fn:repo}).
+
+\begin{figure}[tbh!]
+    \centering
+    \includegraphics[width=\textwidth]{figs/notebook.png}
+    \caption{Screenshot of the beginning of the Object Table tutorial notebook.}
+    \label{fig:notebook}
+\end{figure}
+
+\begin{figure}[tbh!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figs/number_density.pdf}
+    \caption{A resulting plot from the example analysis in the tutorial notebook for the Truth-match Table. The plot shows the measured and true galaxy number density as a function of magnitude. The code to generate this plot is included in the notebook.}
+    \label{fig:number_density}
+\end{figure}
+
+
+
 
 \section{Conclusion and Outlook}
 \label{sec:outlook}
