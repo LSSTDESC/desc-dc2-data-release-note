@@ -32,8 +32,8 @@
 \code{truth_type} & int64 & -- & 1 for galaxies, 2 for stars, and 3 for SNe \\ 
 \code{match_objectId} & int64 & -- & \code{objectId} of the matching object entry ($-1$ for unmatched truth entries$^\text{\hyperlink{truth_fn3}{3}}$) \\ 
 \code{match_sep} & float64 & arcsec & On-sky angular separation of this object--truth matching pair ($-1$ for unmatched truth entries$^\text{\hyperlink{truth_fn3}{3}}$) \\ 
-\code{is_good_match} & bool & -- & True if this object--truth matching pair satisfies all matching criteria \\
-\code{is_nearest_neighbor} & bool & -- & True if this truth entry is the nearest neighbor of the object specified by \code{match_objectId} \\
-\code{is_unique_truth_entry} & bool & -- & True for truth entries that appear for the first time in this truth table$^\text{\hyperlink{truth_fn3}{3}}$ \\
+\code{is_good_match} & bool & -- & \code{True} if this object--truth matching pair satisfies all matching criteria \\
+\code{is_nearest_neighbor} & bool & -- & \code{True} if this truth entry is the nearest neighbor of the object specified by \code{match_objectId} \\
+\code{is_unique_truth_entry} & bool & -- & \code{True} for truth entries that appear for the first time in this truth table$^\text{\hyperlink{truth_fn3}{3}}$ \\
 \end{longtable}
 \end{ThreePartTable}

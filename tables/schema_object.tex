@@ -15,8 +15,8 @@
 \code{objectId} & int64 & -- & Unique object ID \\
 \code{parentObjectId} & int64 & -- & Parent object ID \\
 %
-\code{good} & bool & -- & True if the source has no flagged pixels \\
-\code{clean} & bool & -- &  True if the source has no flagged pixels (i.e., \code{good}) and is not skipped by the deblender \\
+\code{good} & bool & -- & \code{True} if the source has no flagged pixels \\
+\code{clean} & bool & -- &  \code{True} if the source has no flagged pixels (i.e., \code{good}) and is not skipped by the deblender \\
 \code{blendedness} & float64 & -- & Measure of how flux is affected by neighbors ($1 - I_\text{child}/I_\text{parent}$; see \S\,4.9.11 of \citealt{10.1093/pasj/psx080}) \\
 \code{extendedness} & float64 & -- & 0 for stars; 1 for extended objects \\
 \code{ra} & float64 & degree & Right Ascension \\
