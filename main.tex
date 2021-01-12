@@ -159,9 +159,9 @@ Each data table is further partitioned into several files that correspond to dif
 \subsection{Downloading Data Files}
 \label{sec:download}
 
-The data files are made available via a web portal\footnote{\https{lsstdesc-portal.nersc.gov}} using Globus\footnote{\https{www.globus.org}} services. Any user can authenticate using their organizational login or with a Globus ID\footnote{\https{www.globusid.org/what}} to initiate transfers of the full or partial data set to another endpoint to which the user has access, whether it be a laptop or a high-performance computing center. 
+The data files are made available via a data portal website\footnote{\https{lsstdesc-portal.nersc.gov}\label{fn:portal}} using Globus\footnote{\https{www.globus.org}} services. Any user can authenticate using their organizational login or with a Globus ID\footnote{\https{www.globusid.org/what}} to initiate transfers of the full or partial data set to another endpoint to which the user has access, whether it be a laptop or a high-performance computing center. 
 
-Detailed instructions on data transfers can be found in our Public Release repository.\footnote{\https{github.com/LSSTDESC/DC2-Public-Release}\label{fn:repo}}
+Detailed instructions on data transfers can be found on our data portal website (see Footnote~\ref{fn:portal}).
 
 \subsection{Accessing Data in Python}
 \label{sec:gcr}
@@ -170,7 +170,7 @@ While the data files are accessible via standard Parquet I/O tools, we provide a
 
 The \code{GCRCatalogs} package is installable by package managers \code{pip} and \code{conda}.
 Once installed, the package should be configured to recognize the path to which the data files have been downloaded. The DC2 data set will then be readily available in the user's own Python environment. 
-Detailed instructions can be found in our Public Release repository (see Footnote~\ref{fn:repo}).
+Detailed instructions can be found in our data portal website (see Footnote~\ref{fn:portal}).
 
 Below we show an example Python code snippet to demonstrate how to use \code{GCRCatalogs} to obtain the R.A. and Decl. columns from three tracts of the Object Table, with a sampling rate of 1\%. The high-level user interface makes the code simple and readable. 
 
@@ -205,12 +205,12 @@ data = obj_cat.get_quantities(
 
 We provide two example Python Jupyter Notebooks which further demonstrate how to use \code{GCRCatalogs} to access the data.
 They are designed as tutorials, with clear instructions (see a screenshot in \autoref{fig:notebook}). In addition to demonstrating the access method, these notebooks also explain the data model in detail, and provide a few simple analyses that can be used as starting points for further development (see an example plot from the notebook in \autoref{fig:number_density}).
-These notebooks can be found in the associated GitHub repository (see Footnote~\ref{fn:repo}).
+These notebooks can be found in a GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/tree/main/notebooks}}.
 
 \section{Summary and Outlook}
 \label{sec:outlook}
 In this Note we described the first public data release for DC2 carried out by the LSST DESC. We make data available for a simulated WFD survey spanning 300 degree$^2$ and 5 years of Rubin observations, including a subset of the coadd-based catalogs that would be included in Rubin Observatory's DR6. %We provided a brief overview of the major features of the data set in~\autoref{sec:features} and a detailed description of the available products in~\autoref{sec:products}. The data can be accessed via a web portal that offers a convenient interface for data transfers using Globus, and we also released a set of example notebooks to enable first quick experiments, as described in~\autoref{sec:access}. 
-We encourage new users to provide feedback and ask questions via a dedicated GitHub repository (see Footnote~\ref{fn:repo}).
+We encourage new users to provide feedback and ask questions via the ``Discussions'' feature in the dedicated GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/discussions}}.
 
 This data release (v1) focuses on a limited set of data products generated with the LSST Science Pipelines. In the future, we plan to extend this data release in several directions. First, LSST DESC is currently working on generating so-called ``add-on'' catalogs. These catalogs provide information obtained from further processing the data. Examples include a photo-$z$ catalog and a cluster catalog. Once these catalogs have been carefully validated and are of sufficient quality to be of broader interest, they will be added to the DC2 Data Release. Second, the processing of the DDF portion of DC2 is still in progress. As explained in more detail in~\cite{2020arXiv201005926L}, the DDF region contains several astrophysical components, e.g.~AGNs, that are not available in the WFD region. As with the add-on catalogs, once careful validation has concluded, we plan to make those data available as well. Finally, for cosmology it is very informative to compare results from different survey data releases to build a better understanding of the impact of the depth of the data on cosmological constraints. Therefore, LSST DESC is currently generating additional coadds and associated catalogs for subsets of the data corresponding to 1- and 2-year depths. Depending on the feedback we receive, these datasets may become part of future public data releases as well.
 
