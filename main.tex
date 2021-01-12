@@ -98,7 +98,7 @@ For the image processing of the DC2 data, we used version 19.0.0 of the LSST Sci
 \section{Available Data Sets}
 \label{sec:products}
 
-This Data Release (v1) provides the data from the WFD campaign for 5 years of observations (corresponding to Rubin's DR6). This data set includes two tables: the Object Table and the Truth-match Table. We define these tables and describe their data models in the subsections below. 
+This Data Release (v1) provides the data from the WFD campaign for 5 years of observations (corresponding to Rubin's DR6). This data set includes two tables: the Object Table (about 147 million entries, 118 gigabytes) and the Truth-match Table (about 766 million entries, 63 gigabytes). Each is partitioned by sky region into 166 files, as described in detail in ~\autoref{sec:representation}.   We define these tables and describe their data models in the subsections below. 
 
 \subsection{Object Table}
 \label{sec:object}
@@ -112,7 +112,7 @@ Each entry (row) in the Object Table corresponds to one measured astronomical ob
 \subsection{Truth-match Table}
 \label{sec:truth}
 
-The Truth-match Table is a joint representation of both the truth information (i.e., the perfect, noiseless measurement of astronomical objects' positions and fluxes within a standard passbands, used as inputs to the image simulations) and their best matches to the measured objects in the Object Table. The Truth-match Table allows users to examine, for example, the differences between true and measured fluxes and positions, and compare them to the expected levels of photometric and astrometric accuracy and precision.
+The Truth-match Table is a joint representation of both the truth information (i.e., the perfect, noiseless measurement of astronomical objects' positions and fluxes within the standard passbands, used as inputs to the image simulations) and their best matches to the measured objects in the Object Table. The Truth-match Table allows users to examine, for example, the differences between true and measured fluxes and positions, and compare them to the expected levels of photometric and astrometric accuracy and precision.
 
 The generation of the Truth-match Table is described in Section~4.2.1 of \cite{2020arXiv201005926L}. The truth information in the Truth-match Table only includes ``summary'' properties (i.e., static, or infinite-time averaged fluxes) of galaxies, stars, and supernovae (SNe). Time-varying properties are not included. The match information stored in the  Truth-match Table is produced with the following procedure applied for each entry in the Object Table:
 \begin{enumerate}
@@ -147,7 +147,7 @@ We additionally provide a Python package, \code{GCRCatalogs}, which contains a h
 \begin{figure}[tbh!]
     \centering
     \includegraphics[width=0.8\textwidth]{figs/DC2_region_skymap_overlay.png}
-    \caption{Sky map of the DC2 footprint. The large green trapezoid is the full DC2 footprint. The small red square in the upper right corner is the DDF region that is excluded in this release. Each tract is represented by a rectangle with a number on it showing the tract ID. The light pink region shows the size of LSSTCam focal plane as a comparison.}
+    \caption{Sky map of the DC2 footprint. The large green trapezoid is the full DC2 footprint. The small red square in the upper right corner is the DDF region that is excluded in this release. Each tract is represented by a rectangle with a number on it showing the tract ID. The light pink region shows the size of the LSSTCam focal plane as a comparison.}
     \label{fig:skymap}
 \end{figure}
 
