@@ -1,0 +1,26 @@
+\begin{ThreePartTable}
+\begin{TableNotes} % to clear cached table note
+\item
+\end{TableNotes}
+\begin{longtable}{p{6.1in}}
+\hline
+\code{Filename} \code{pattern} \\
+\quad \textit{Description} \\ 
+\hline \hline
+\endhead
+\endfoot
+\hline
+\insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
+\endlastfoot
+\code{deepCoadd/{filter}/{tract}/{patch}.fits} \\
+\quad \textit{Coadded images} \\ \hline
+\code{deepCoadd/{filter}/{tract}/{patch}_nImage.fits} \\
+\quad \textit{Number of visit-level images contributing to each pixel of the coadded image} \\ \hline
+\code{deepCoadd-results/{filter}/{tract}/{patch}/bkgd-{filter}-{tract}-{patch}.fits} \\
+\quad \textit{Background model for the calibrated exposure of the coadded image} \\ \hline
+\code{deepCoadd-results/{filter}/{tract}/{patch}/calexp-{filter}-{tract}-{patch}.fits} \\
+\quad \textit{Calibrated exposure of the coadded image} \\ \hline
+\code{deepCoadd-results/{filter}/{tract}/{patch}/det-{filter}-{tract}-{patch}.fits} \\
+\quad \textit{Source catalog of footprints detected on the coadded image} \\ \hline
+\end{longtable}
+\end{ThreePartTable}
