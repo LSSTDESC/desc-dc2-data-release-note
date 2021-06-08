@@ -103,7 +103,7 @@ For the image processing of the DC2 data, we used version 19.0.0 of the LSST Sci
 \section{Available Data Sets}
 \label{sec:products}
 
-This Data Release (\thisversion{}) provides the data from the WFD campaign for 5 years of observations (corresponding to Rubin's DR6). This data set includes two tables: the Object Table (about \rev{114 million extended sources and 33 million point sources;} 118 gigabytes) and the Truth-match Table (about \rev{759 million galaxy entries, 5 million star entries, and half million SN entries;} 63 gigabytes). Each is partitioned by sky region (``tract'') into 166 files, as described in detail in ~\autoref{sec:representation}. \rev{In addition, two tracts of coadded images are also available.}  We define \rev{each of these data products} in the subsections below. 
+This Data Release (\thisversion{}) provides the data from the WFD campaign for 5 years of observations (corresponding to Rubin's DR6). This data set includes two tables: the Object Table (about 114 million extended sources and 33 million point sources; 118 gigabytes) and the Truth-match Table (about 759 million galaxy entries, 5 million star entries, and half million SN entries; 63 gigabytes). Each is partitioned by sky region (``tract'') into 166 files, as described in detail in ~\autoref{sec:representation}. In addition, two tracts of coadded images are also available. We define each of these data products in the subsections below. 
 
 \subsection{Object Table}
 \label{sec:object}
@@ -136,10 +136,10 @@ These selections are particularly important for users who wish to access the fil
 The file format and the organization of files for the Truth-match Table are described in \autoref{sec:representation}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
 
 \subsection{Coadded Images}
-\rev{
-The coadded images (and the corresponding calibrated exposures, background models, and detected sources; see \autoref{app:coadded-image-files}) for a small sky region (tracts 3828 and 3829; see \autoref{sec:representation} for definition) are available. These images are part of the direct outputs from the image processing using the LSST Science Pipelines (see \autoref{sec:processing}), and the coaddition process is described in Sec.~3.3 of \cite{10.1093/pasj/psx080} and Sec.~4.2 of \cite{2018arXiv181203248B}. 
+
+The coadded images (and the corresponding calibrated exposures, background models, and detected sources; see \autoref{app:coadded-image-files}) for a small sky region (tracts 3828 and 3829; see \autoref{sec:representation} for definition) are available. These images are part of the direct outputs from the image processing using the LSST Science Pipelines (see \autoref{sec:processing}). The coaddition process is described in Sec.~3.3 of \cite{10.1093/pasj/psx080} and Sec.~4.2 of \cite{2018arXiv181203248B}. 
 The file format and the organization of files for the coadded images are also described in \autoref{sec:representation} and \autoref{app:coadded-image-files}. 
-}
+
 
 \section{Data Access}
 \label{sec:access}
@@ -162,8 +162,8 @@ We additionally provide a Python package, \code{GCRCatalogs}, which contains a h
 
 Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Science Pipelines.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} illustrates the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; i.e., an entry that is near a tract boundary still only appears in the tract it belongs to. Each Parquet file contains only one partition (row group). 
 
-\rev{The coadded images we provided in this release are parts of the output files from v19.0.0 of the LSST Science Pipelines. These images are stored in the FITS (Flexible Image Transport System) format, and partitioned by filter (passband) and sky region. The sky region partition scheme follows the same ``Rings sky map'' described above. Each tract is further subdivided into ``patches'', and each individual coadded image file corresponds to a single patch. The descriptions of files included in this data set, and the associated filename patterns, can be found in \autoref{app:coadded-image-files}. 
-}
+The coadded images we provided in this release are parts of the output files from v19.0.0 of the LSST Science Pipelines. These images are stored in the FITS (Flexible Image Transport System) format, and partitioned by filter (passband) and sky region. The sky region partition scheme follows the same ``Rings sky map'' described above. Each tract is further subdivided into ``patches'', and each individual coadded image file corresponds to a single patch. The descriptions of files included in this data set, and the associated filename patterns, can be found in \autoref{app:coadded-image-files}. 
+
 
 \subsection{Downloading Data Files}
 \label{sec:download}
@@ -175,7 +175,7 @@ Detailed instructions on data transfers can be found on our data portal website 
 \subsection{Accessing Data in Python}
 \label{sec:gcr}
 
-While the \rev{tabular} data files are accessible via standard Parquet I/O tools, we provide a high-level Python package, \code{GCRCatalogs}\footnote{\https{github.com/LSSTDESC/gcr-catalogs}}, to assist users to access DC2 data. 
+While the tabular data files are accessible via standard Parquet I/O tools, we provide a high-level Python package, \code{GCRCatalogs}\footnote{\https{github.com/LSSTDESC/gcr-catalogs}}, to assist users to access DC2 data. 
 
 The \code{GCRCatalogs} package is installable by package managers \code{pip} and \code{conda}.
 Once installed, the package should be configured to recognize the path to which the data files have been downloaded. The DC2 data set will then be readily available in the user's own Python environment. 
@@ -196,7 +196,7 @@ data = obj_cat.get_quantities(
 )
 \end{minted}
 
-\rev{For accessing the coadded images, we recommend using standard FITS I/O tools, such as the \code{fits} module in \code{astropy}.\footnote{\https{docs.astropy.org/en/stable/io/fits/index.html}}}
+For accessing the coadded images, we recommend using standard FITS I/O tools, such as the \code{fits} module in \code{astropy}.\footnote{\https{docs.astropy.org/en/stable/io/fits/index.html}}
 
 \subsection{Example Python Jupyter Notebook}
 \label{sec:notebooks}
@@ -214,8 +214,8 @@ data = obj_cat.get_quantities(
     \label{fig:number_density}
 \end{figure}
 
-We provide two example Python Jupyter Notebooks which further demonstrate how to use \code{GCRCatalogs} to access the \rev{tabular} data 
-\rev{(currently no example notebook is available for coadded images)}.
+We provide two example Python Jupyter Notebooks which further demonstrate how to use \code{GCRCatalogs} to access the tabular data 
+(currently no example notebook is available for coadded images).
 They are designed as tutorials, with clear instructions (see a screenshot in \autoref{fig:notebook}). In addition to demonstrating the access method, these notebooks also explain the data model in detail, and provide a few simple analyses that can be used as starting points for further development (see an example plot from the notebook in \autoref{fig:number_density}).
 These notebooks can be found in a GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/tree/main/notebooks}}.
 
@@ -229,8 +229,8 @@ This data release (\thisversion{}) focuses on a limited set of data products gen
 
 If you use these data products in a publication, we ask that you cite this Note and the DC2 overview paper~\citep{2020arXiv201005926L}.
 If you use \code{GRCCatalogs} to access the data products, please also cite \cite{2018ApJS..234...36M}. 
-\rev{If you would like to serve these data sets on a mirror site, or to ingest and serve them via a different access method (e.g., a database), we ask you to inform LSST~DESC at \href{mailto:papers@lsstdesc.org}{papers@lsstdesc.org} so that we can contact you when future updates are made to these data sets.}
-We encourage \rev{all} users to provide feedback and ask questions via the ``Discussions'' feature in the dedicated GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/discussions}}.
+If you would like to serve these data sets on a mirror site, or to ingest and serve them via a different access method (e.g., a database), we ask you to inform LSST~DESC at \href{mailto:papers@lsstdesc.org}{papers@lsstdesc.org} so that we can contact you when future updates are made to these data sets.
+We encourage all users to provide feedback and ask questions via the ``Discussions'' feature in the dedicated GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/discussions}}.
 
 %%%%%% Appendices %%%%%% 
 \clearpage
