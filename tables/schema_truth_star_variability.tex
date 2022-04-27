@@ -1,0 +1,19 @@
+\begin{ThreePartTable}
+\begin{TableNotes}
+\end{TableNotes}
+\begin{longtable}{p{1.6in}p{0.5in}p{0.6in}p{2.9in}}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ 
+\hline
+\endhead
+%%%\endfoot
+%%%\hline
+%%%%\insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
+%%%\endlastfoot
+\code{id} & int64 & -- & Unique object ID\\
+\code{obsHist} & int64 & -- & unique visit ID\\
+\code{MJD} & float64 & day & time of visit\\
+\code{bandpass} & string & -- & LSST band\\
+\code{delta_flux} & float32 & nJy & delta from \code{flux_<band>} in summary table\\
+\end{longtable}
+\end{ThreePartTable}

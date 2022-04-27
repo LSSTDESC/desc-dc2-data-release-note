@@ -1,0 +1,20 @@
+\begin{ThreePartTable}
+%%%\begin{TableNotes}
+%%%\end{TableNotes}
+\begin{longtable}{p{1.6in}p{0.5in}p{0.6in}p{2.9in}}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ 
+\hline
+\endhead
+%%%\endfoot
+%%%\hline
+%%%%\insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
+%%%\endlastfoot
+\code{id} & int64 & -- & Unique integer object ID, unrelated to \code{id_string}\\
+\code{obsHist} & int64 & -- & unique visit ID\\
+\code{MJD} & float64 & day & time of visit\\
+\code{bandpass} & string & -- & LSST band\\
+\code{delta_flux} & float32 & nJy & flux for this visit (``average'' is 0 for SNe)\\
+\code{id_string} & string & -- & unique object ID\\
+\end{longtable}
+\end{ThreePartTable}
