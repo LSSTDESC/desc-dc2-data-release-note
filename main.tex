@@ -99,6 +99,13 @@ The imSim simulation software, which is described in more detail in~\cite{2020ar
 \label{sec:processing}
 For the image processing of the DC2 data, we used version 19.0.0 of the LSST Science Pipelines code\footnote{\https{pipelines.lsst.io/v/v19_0_0/index.html}}.  The image processing steps are described in detail in \cite{2020arXiv201005926L}, \cite{10.1093/pasj/psx080}, and \cite{2018arXiv181203248B}.   Since the simulations lack throughput variation over the focal plane and from visit to visit, we omitted the joint photometric and astrometric calibration across visits, and consequently, the standard passbands for the LSST filters are simply the total throughputs\footnote{\https{github.com/lsst/throughputs/releases/tag/1.4}} used in the simulations and which were derived by the Rubin systems engineering team.
 
+\subsection{Known Issues}
+
+\subsubsection{Ellipticity Distribution}
+
+An issue with the intrinsic ellipticity distribution in the cosmoDC2 catalog has been identified and documented in \cite{Kovacs:2022:6336066}. This issue manifests in the distribution of intrinsic (not lensed) ellipticities being skewed to lower values, i.e., galaxies are rounder than they should have been. 
+Note that the lensing distortions were unaffected, but they were added onto the too-round intrinsic shapes. Since the DC2 image simulation takes the lensed ellipticities in cosmoDC2 as input, the distribution of ellipticities in the DC2 object catalog (after image simulations) is also skewed to lower values, beyond the effect of the PSF. 
+
 
 \section{Available Data Sets}
 \label{sec:products}
@@ -112,7 +119,7 @@ The Object Table contains information about static astronomical objects measured
 
 The generation of the Object Table is described in detail in Section~8 of \cite{2020arXiv201005926L}. In short, after the LSST Science Pipelines (19.0.0) produce the deepCoadd catalogs of multiple bands, we merge these catalogs across bands, and rename and compute certain columns to produce the final Object Table. The columns we rename or compute are meant to produce a science-ready catalog that resembles the Rubin LSST Data Products Definition Document (LSE-163; \https{lse-163.lsst.io}) for the end users. 
 
-Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectId}). There are no duplicated entries in the Object Table. For details about the file format and the organization of files for the Object Table, see \autoref{sec:representation}. The full schema for the Object Table can be found in \autoref{app:object-schema}. 
+Each entry (row) in the Object Table corresponds to one measured astronomical object, assigned with a unique ID (\code{objectId}). There are no duplicated entries in the Object Table. For details about the file format and the organization of files for the Object Table, see \autoref{sec:representation-tables}. The full schema for the Object Table can be found in \autoref{app:object-schema}. 
 
 \subsection{Truth-match Table}
 \label{sec:truth}
@@ -133,12 +140,34 @@ Flags to distinguish these situations are included in the Truth-match Table.
 Selecting all entries with \code{match_objectId} $> -1$ from the Truth-match Table would result in a subset of Truth-match entries that have exactly the same row order as the entries in the Object Table (and hence may contain duplicated truth entries). On the other hand, selecting all entries with \code{is_unique_truth_entry} being \code{True} would produce a subset of Truth-match entries that contains all unique truth entries, including truth entries that have not been chosen as a match.
 These selections are particularly important for users who wish to access the files directly. For users who use GCRCatalogs (\autoref{sec:gcr}), the reader will automatically select the correct rows depending on whether the user loads the ``Truth'' view (having all truth entries) or the ``Match'' view (having entries that matches to the Object Table). We refer users to the example notebooks we provided (\autoref{sec:notebooks}) for detail.
 
-The file format and the organization of files for the Truth-match Table are described in \autoref{sec:representation}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
+The file format and the organization of files for the Truth-match Table are described in \autoref{sec:representation-tables}. The full schema for the Truth-match Table can be found in \autoref{app:truth-schema}.
 
-\subsection{Coadded Images}
 
-The coadded images (and the corresponding calibrated exposures, background models, and detected sources; see \autoref{app:coadded-image-files}) for a small sky region (tracts 3828 and 3829; see \autoref{sec:representation} for definition) are available. These images are part of the direct outputs from the image processing using the LSST Science Pipelines (see \autoref{sec:processing}). The coaddition process is described in Sec.~3.3 of \cite{10.1093/pasj/psx080} and Sec.~4.2 of \cite{2018arXiv181203248B}. 
-The file format and the organization of files for the coadded images are also described in \autoref{sec:representation} and \autoref{app:coadded-image-files}. 
+\subsection{Unmerged Truth Information}
+\label{sec:truth-variable}
+
+Characteristics of variable sources (stars and SNe) can be found in several tables. These tables are of two types:
+\begin{enumerate}
+    \item Summary Tables, one each for stars and SNe. In these tables, each row represent one single object (star or SN). These tables are similar to the Truth-match table but
+    \begin{enumerate}
+        \item they are restricted to sources which are stars or SNe, respectively
+        \item they do not include columns which have to do with matching nor any concerning spatial partitioning
+        \item each has a few extra columns specific to source type
+        \item Truth-match columns whose value is constant for a particular source type (e.g., \code{is_variable} for SNe) are omitted in the unmerged file
+    \end{enumerate}
+    \item Variability Tables, one each for stars and SNe. These tables have a row for each observation of a variable source, excluding stars whose variability would not be detectable by LSST. Note that most stars are classed as ``variable'' but only about 10\% vary enough to be included in the variability table; for such stars, the flag field \code{above_threshold} in the star summary table is set. These tables have only a few columns, including ID, which may be matched with the corresponding Summary Table ID.
+   
+\end{enumerate}
+
+There is a summary table for galaxies as well, similar to Truth-match but with some extra columns.
+
+For details about file format and organization see \autoref{sec:representation-unmerged}. The complete schema for these tables is described \autoref{app:variable-truth-schema} 
+
+\subsection{Intermediate Data Products from LSST Science Pipelines}
+
+The calibrated exposures, background subtracted images, and source catalogs output from the single-epoch processing as well as the coadded images (and the corresponding calibrated exposures, background models, and detected sources; see \autoref{app:coadded-image-files}) for a small sky region (tracts 3828 and 3829; see \autoref{sec:representation} for definition) are available. These images are part of the direct outputs from the image processing using the LSST Science Pipelines (see \autoref{sec:processing}). The single-epoch and coaddition processes are described in Sec.~3.1 and Sec.~3.3 of \cite{10.1093/pasj/psx080}, respectively, as well as in Sec.~3.1 and Sec.~4.2 of \cite{2018arXiv181203248B}. 
+The file format and the organization of files for the single-epoch and coadded images are also described in \autoref{sec:representation-intermediate} and \autoref{app:coadded-image-files}. 
+
 
 
 \section{Data Access}
@@ -147,6 +176,9 @@ The file format and the organization of files for the coadded images are also de
 
 \subsection{Data File Format and Organization}
 \label{sec:representation}
+
+\subsubsection{Object and Truth-match Tables}
+\label{sec:representation-tables}
 
 All data tables in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available for multiple development systems. 
 The data files can be easily downloaded to the user's machine via Globus (\autoref{sec:download}), and read with Python packages such as \code{pyarrow} or \code{fastparquet}.\footnote{\code{pyarrow}: \https{arrow.apache.org/docs/python}; \code{fastparquet}: \https{fastparquet.readthedocs.io}}
@@ -161,6 +193,17 @@ We additionally provide a Python package, \code{GCRCatalogs}, which contains a h
 \end{figure}
 
 Each data table is further partitioned into several files that correspond to different parts of the sky. The partition is based on the ``tract'' value in the ``Rings sky map'' pixelization of LSST Science Pipelines.\footnote{\https{pipelines.lsst.io/py-api/lsst.skymap.ringsSkyMap.RingsSkyMap.html}} \autoref{fig:skymap} illustrates the partition. The same partition is used for both Object Table and Truth-match Table. No padding is included; i.e., an entry that is near a tract boundary still only appears in the tract it belongs to. Each Parquet file contains only one partition (row group). 
+
+
+\subsubsection{Unmerged Truth Tables}
+\label{sec:representation-unmerged}
+
+Each of the four point source tables (star summary, star variability, SN summary, SN variability) is available in two physical formats: SQLite database file and parquet file.  The table schema is identical between the two formats. The galaxy summary is available only in Parquet, partitioned into healpix pixels.  
+
+The point source Parquet files are smaller than the SQlite versions, particularly in the case of the stellar variability truth table.  Also the Parquet files, and only the Parquet files, may be accessed via the Python package \code{GCRCatalogs}. However applications needing to do large numbers of queries of star light curves will benefit from the efficiency provided by SQLite since such queries run about $\sim$100 times faster on the SQLite files. 
+
+\subsubsection{Intermediate Data Products from LSST Science Pipelines}
+\label{sec:representation-intermediate}
 
 The coadded images we provided in this release are parts of the output files from v19.0.0 of the LSST Science Pipelines. These images are stored in the FITS (Flexible Image Transport System) format, and partitioned by filter (passband) and sky region. The sky region partition scheme follows the same ``Rings sky map'' described above. Each tract is further subdivided into ``patches'', and each individual coadded image file corresponds to a single patch. The descriptions of files included in this data set, and the associated filename patterns, can be found in \autoref{app:coadded-image-files}. 
 
@@ -252,9 +295,38 @@ We encourage all users to provide feedback and ask questions via the ``Discussio
 \label{app:truth-schema}
 \input{tables/schema_truth}
 
-\clearpage
+\bigskip
 
-\section{Coadded Image File Descriptions}
+\subsection{Star Summary Truth Table Schema}
+\label{app:star-summary-truth-schema}
+\input{tables/schema_truth_star_summary}
+
+\bigskip
+
+\subsection{Supernova Summary Truth Table Schema}
+\label{app:sn-summary-truth-schema}
+\input{tables/schema_truth_sn_summary}
+
+\bigskip
+
+\subsection{Galaxy Summary Truth Table Schema}
+\label{app:galaxy-summary-truth-schema}
+\input{tables/schema_truth_galaxy_summary}
+
+\bigskip
+
+\subsection{Star Variability Truth Table Schema}
+\label{app:star-variability-truth-schema}
+\input{tables/schema_truth_star_variability}
+
+\bigskip
+
+\subsection{Supernova Variability Truth Table Schema}
+\label{app:sn-variability-truth-schema}
+\input{tables/schema_truth_sn_variability}
+
+\bigskip
+\section{Intermediate Data Products File Descriptions}
 \label{app:coadded-image-files}
 \input{tables/coadded-image-files}
 
@@ -263,7 +335,7 @@ We encourage all users to provide feedback and ask questions via the ``Discussio
 \clearpage
 \section*{Acknowledgments}
 \phantomsection
-\addcontentsline{toc}{section}{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgments}
 
 \input{desc_ack_standard.tex}
 

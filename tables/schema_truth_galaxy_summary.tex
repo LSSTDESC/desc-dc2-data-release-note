@@ -1,0 +1,26 @@
+\begin{ThreePartTable}
+\begin{TableNotes}
+\end{TableNotes}
+\begin{longtable}{p{1.6in}p{0.5in}p{0.6in}p{2.9in}}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ 
+\hline
+\endhead
+%%\endfoot
+%%%\hline
+%%%\insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
+%%%\endlastfoot
+\code{id} & int64 & -- & Unique object ID\\
+\code{host_galaxy} & int64 & -- & Always -1 for galaxies\\
+\code{ra} & float64 & degree & Right Ascension\\
+\code{dec} & float64 & degree & Declination\\
+\code{redshift} & float64 & -- & Redshift\\
+\code{is_variable} & bool & -- & Always False for galaxies\\
+\code{is_pointsource} & bool & -- & Always False for galaxies\\
+
+\code{flux_<band>} & float32 & nJy & Static flux value in <band>\\
+\code{flux_<band>_noMW} & float32 & nJy & Static flux value in <band>, without Milky Way extinction (i.e., dereddened)\\
+\code{av} & float32 & -- & Milky way extinction parameter at object location\\
+\code{rv} & float32 & -- & Milky way extinction parameter at object location\\
+\end{longtable}
+\end{ThreePartTable}

@@ -1,0 +1,28 @@
+\begin{ThreePartTable}
+%%%\begin{TableNotes}
+%%%\end{TableNotes}
+\begin{longtable}{p{1.6in}p{0.5in}p{0.6in}p{2.9in}}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ 
+\hline
+\endhead
+%%%\endfoot
+%%%\hline
+%%%\insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
+%%%\endlastfoot
+\code{id_string} & string & -- & Unique object ID\\
+\code{id} & int64 & -- & alternate id which is an int\\
+\code{host_galaxy} & int64 & -- & associated galaxy\\
+\code{ra} & float64 & degree & Right Ascension\\
+\code{dec} & float64 & degree & Declination\\
+\code{redshift} & float64 & -- & Redshift\\
+\code{mB} & float64 & -- & normalization factor \\
+\code{c} & float64 & -- & empirical parameter controlling the colors\\
+\code{t0} & float64 & -- & time in mjd of phase=0, corresponding to B-band maximum \\
+\code{x0} & float64 & -- & normalization factor\\
+\code{x1} & float64 & -- & empirical parameter controlling the stretch in time of light curves\\
+\code{max_flux_<band>} & float32 & nJy & max flux observed for <band>\\
+\code{av} & float32 & --  & Milky Way extinction parameter at object location\\
+\code{rv} & float32 & -- & Milky Way extinction parameter at object location\\
+\end{longtable}
+\end{ThreePartTable}

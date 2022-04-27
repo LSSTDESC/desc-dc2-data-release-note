@@ -1,0 +1,23 @@
+\begin{ThreePartTable}
+\begin{TableNotes}
+\end{TableNotes}
+\begin{longtable}{p{1.6in}p{0.5in}p{0.6in}p{2.9in}}
+\hline
+\textbf{Name} & \textbf{Type} & \textbf{Unit} & \textbf{Description} \\ 
+\hline
+\endhead
+%%%\endfoot
+%%%\hline
+%%%%\insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
+%%%\endlastfoot
+\code{id} & int64 & -- & Unique object ID\\
+\code{ra} & float64 & degree & Right Ascension\\
+\code{dec} & float64 & degree & Declination\\
+\code{flux_<band>} & float32 & nJy & Static flux value in <band>\\
+\code{model} & string & -- & variability model\\
+\code{max_stdev_delta_mag} & float32 & AB mag & max stdev in delta magnitude across all bands\\
+\code{above_threshold} & bool & -- & True if above quantity satisfies threshold (here set to 1 mmag) for LSST detectability\\
+\code{av} & float32 & -- & Milky way extinction parameter at object location\\
+\code{rv} & float32 & -- & Milky way extinction parameter at object location\\
+\end{longtable}
+\end{ThreePartTable}
