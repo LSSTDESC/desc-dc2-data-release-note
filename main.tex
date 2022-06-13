@@ -83,7 +83,7 @@ This note is organized as follows. In~\autoref{sec:features} we describe the maj
 
 Here we describe the astrophysical inputs for the simulated WFD data set.\footnote{As described in \cite{2020arXiv201005926L}, data that were generated for the DDF region have additional astrophysical components such as strong lenses and an enhanced rate of transients.}  The components of this data set are mostly limited to the types of objects needed to support static probes of dark energy science, specifically the galaxies from the cosmoDC2 extragalactic catalog \citep{korytov}.  In addition, this data set includes stars from a simulated Milky Way, which are needed for astrometric and photometric calibration by the image processing pipeline, as well as Type Ia supernovae (SNe), which were included throughout the 300~deg$^2$ DC2 region.  The center of the WFD region is at R.A.~$= 55^\circ\!\!.064$, Decl.~$= -29^\circ\!\!.783$ (see~\autoref{fig:skymap}), and so the entire simulation region lies well outside of the Ecliptic and Galactic planes.
 
-As noted, the galaxies are from the cosmoDC2 extragalactic catalog\footnote{ \https{portal.nersc.gov/project/lsst/cosmoDC2/}}, which covers 440 deg$^2$ out to a redshift of $z = 3$ and is complete to $m_r <28$.  The cosmoDC2 catalog is based on the Outer Rim $N$-body simulation \citep{2019ApJS..245...16H}, and the properties of the galaxies were derived using the Galacticus semi-analytic model \citep{benson_2010b} and painted onto dark matter halos using GalSampler \citep{2020MNRAS.495.5040H}.  The derived galaxy properties include stellar mass, morphology, spectral energy distributions, broadband filter magnitudes, host halo information, and weak lensing shears.   The bulge and disk components of the galaxies are rendered separately as S\'ersic profiles, and galaxies with $m_i < 27$ have ``knots'' of star formation added in order to model more complex light profiles for the brighter galaxies. The fluxes for these star-forming regions have been re-allocated from the disk component, and the knots have the same spectral energy distribution (SED) as the disk.
+As noted, the galaxies are from the cosmoDC2 extragalactic catalog,\footnote{ \https{portal.nersc.gov/project/lsst/cosmoDC2/}} which covers 440 deg$^2$ out to a redshift of $z = 3$ and is complete to $m_r <28$.  The cosmoDC2 catalog is based on the Outer Rim $N$-body simulation \citep{2019ApJS..245...16H}, and the properties of the galaxies were derived using the Galacticus semi-analytic model \citep{benson_2010b} and painted onto dark matter halos using GalSampler \citep{2020MNRAS.495.5040H}.  The derived galaxy properties include stellar mass, morphology, spectral energy distributions, broadband filter magnitudes, host halo information, and weak lensing shears.   The bulge and disk components of the galaxies are rendered separately as S\'ersic profiles, and galaxies with $m_i < 27$ have ``knots'' of star formation added in order to model more complex light profiles for the brighter galaxies. The fluxes for these star-forming regions have been re-allocated from the disk component, and the knots have the same spectral energy distribution (SED) as the disk.
 
 The Milky Way stars are simulated using the Galfast model of \citet{2008ApJ...673..864J}, which is based on densities and colors of stars in the Sloan Digital Sky Survey (SDSS). Stellar variability is included for periodic objects (e.g., RR Lyrae and Cepheids) and for non-periodic variables (e.g., CVs, flaring M-dwarfs, etc.).  Stars without a definitive variability class are modeled based on the Kepler Q17 data release \citep{2016ksci.rept....3T}.  The Galactic reddening is based on the three-dimensional model of \cite{2005AJ....130..659A}.
 
@@ -91,13 +91,13 @@ Finally, Type Ia SNe have been added throughout the DC2 region out to a redshift
 
 \subsection{Image Simulation Features}
 
-DC2 used the \code{minion_1016} observing cadence\footnote{ \https{docushare.lsst.org/docushare/dsweb/View/Collection-4604}}, which was the Rubin Observatory LSST baseline cadence when production of the DC2 simulations began. This cadence provides the nominal field positions, telescope rotations, and filter selections for each 30-second pointing, as well as predicted seeing and airmass.  For the sky background, the LSST sky model is used, which is the ESO sky model with a twilight component added~\citep{2016SPIE.9910E..1AY}.  We have added random translational and rotational dithering to the nominal pointings to make the sky coverage more uniform.
+DC2 used the \code{minion_1016} observing cadence,\footnote{ \https{docushare.lsst.org/docushare/dsweb/View/Collection-4604}} which was the Rubin Observatory LSST baseline cadence when production of the DC2 simulations began. This cadence provides the nominal field positions, telescope rotations, and filter selections for each 30-second pointing, as well as predicted seeing and airmass.  For the sky background, the LSST sky model is used, which is the ESO sky model with a twilight component added~\citep{2016SPIE.9910E..1AY}.  We have added random translational and rotational dithering to the nominal pointings to make the sky coverage more uniform.
 
 The imSim simulation software, which is described in more detail in~\cite{2020arXiv201005926L}, uses the GalSim package \citep{2015A&C....10..121R} to render the astrophysical objects and the night sky.  The point-spread functions (PSFs) for each exposure are computed using a set of atmospheric phase screens that are realizations of Gaussian random fields with a Von Karman power spectrum.  In addition, the PSF calculation includes an optical model of the telescope based on modeling of the active optics system for Rubin Observatory.  After convolution with the PSF, objects are rendered on the LSST CCDs taking into account the instrumental throughput in each band, the object's SED within the bandpass, atmospheric effects such as differential chromatic refraction, and the convergence of the incident beam from the telescope optics. GalSim's sensor model includes the brighter-fatter and tree-ring electrostatic effects that are present in the CCDs used in the LSST Camera (LSSTCam).  Finally, electronics readout effects such as bleed trails, CCD segmentation, intra-CCD cross-talk, read noise, etc., are applied.  These effects are based on measurements of the actual LSSTCam hardware.
 
 \subsection{Image Processing}
 \label{sec:processing}
-For the image processing of the DC2 data, we used version 19.0.0 of the LSST Science Pipelines code\footnote{\https{pipelines.lsst.io/v/v19_0_0/index.html}}.  The image processing steps are described in detail in \cite{2020arXiv201005926L}, \cite{10.1093/pasj/psx080}, and \cite{2018arXiv181203248B}.   Since the simulations lack throughput variation over the focal plane and from visit to visit, we omitted the joint photometric and astrometric calibration across visits, and consequently, the standard passbands for the LSST filters are simply the total throughputs\footnote{\https{github.com/lsst/throughputs/releases/tag/1.4}} used in the simulations and which were derived by the Rubin systems engineering team.
+For the image processing of the DC2 data, we used version 19.0.0 of the LSST Science Pipelines code.\footnote{\https{pipelines.lsst.io/v/v19_0_0/index.html}}  The image processing steps are described in detail in \cite{2020arXiv201005926L}, \cite{10.1093/pasj/psx080}, and \cite{2018arXiv181203248B}.   Since the simulations lack throughput variation over the focal plane and from visit to visit, we omitted the joint photometric and astrometric calibration across visits, and consequently, the standard passbands for the LSST filters are simply the total throughputs\footnote{\https{github.com/lsst/throughputs/releases/tag/1.4}} used in the simulations and were derived by the Rubin systems engineering team.
 
 \subsection{Known Issues}
 
@@ -144,29 +144,30 @@ The file format and the organization of files for the Truth-match Table are desc
 
 
 \subsection{Unmerged Truth Information}
-\label{sec:truth-variable}
+\label{sec:truth-unmerged}
 
-Characteristics of variable sources (stars and SNe) can be found in several tables. These tables are of two types:
+Characteristics of the three types of sources (galaxies, stars, and SNe) can be found in several unmerged tables. These tables provide additional information about these sources beyond what is included in the Truth-match table. Users can use truth object IDs to match between these tables. 
+
+The static truth information of galaxies is stored in a single table. For the variable sources (stars and SNe), the truth information is stored in two types of tables:
 \begin{enumerate}
     \item Summary Tables, one each for stars and SNe. In these tables, each row represent one single object (star or SN). These tables are similar to the Truth-match table but
     \begin{enumerate}
         \item they are restricted to sources which are stars or SNe, respectively
-        \item they do not include columns which have to do with matching nor any concerning spatial partitioning
-        \item each has a few extra columns specific to source type
+        \item they do not include columns which have to do with matching or spatial partitioning
+        \item each has a few extra columns specific to the source type
         \item Truth-match columns whose value is constant for a particular source type (e.g., \code{is_variable} for SNe) are omitted in the unmerged file
     \end{enumerate}
     \item Variability Tables, one each for stars and SNe. These tables have a row for each observation of a variable source, excluding stars whose variability would not be detectable by LSST. Note that most stars are classed as ``variable'' but only about 10\% vary enough to be included in the variability table; for such stars, the flag field \code{above_threshold} in the star summary table is set. These tables have only a few columns, including ID, which may be matched with the corresponding Summary Table ID.
    
 \end{enumerate}
 
-There is a summary table for galaxies as well, similar to Truth-match but with some extra columns.
-
-For details about file format and organization see \autoref{sec:representation-unmerged}. The complete schema for these tables is described \autoref{app:variable-truth-schema} 
+For details about file format and organization see \autoref{sec:representation-unmerged}. The complete schema for these tables is described Tables~\ref{app:star-summary-truth-schema}--\ref{app:sn-variability-truth-schema}.
 
 \subsection{Intermediate Data Products from LSST Science Pipelines}
+\label{sec:intermediate-data-products}
 
-The calibrated exposures, background subtracted images, and source catalogs output from the single-epoch processing as well as the coadded images (and the corresponding calibrated exposures, background models, and detected sources; see \autoref{app:coadded-image-files}) for a small sky region (tracts 3828 and 3829; see \autoref{sec:representation} for definition) are available. These images are part of the direct outputs from the image processing using the LSST Science Pipelines (see \autoref{sec:processing}). The single-epoch and coaddition processes are described in Sec.~3.1 and Sec.~3.3 of \cite{10.1093/pasj/psx080}, respectively, as well as in Sec.~3.1 and Sec.~4.2 of \cite{2018arXiv181203248B}. 
-The file format and the organization of files for the single-epoch and coadded images are also described in \autoref{sec:representation-intermediate} and \autoref{app:coadded-image-files}. 
+We provide the calibrated exposures, background-subtracted images, and source catalogs produced by the single-epoch processing as well as the coadded images (and the corresponding calibrated exposures, background models, and detected sources; see \autoref{app:intermediate-data-products}) for a small sky region (tracts 3828 and 3829; see \autoref{sec:representation} for definition). These images are part of the direct outputs from the image processing using the LSST Science Pipelines (see \autoref{sec:processing}). The single-epoch and coaddition processes are described in Sec.~3.1 and Sec.~3.3 of \cite{10.1093/pasj/psx080}, respectively, as well as in Sec.~3.1 and Sec.~4.2 of \cite{2018arXiv181203248B}. 
+The file format and the organization of files for the single-epoch and coadded images are also described in \autoref{sec:representation-intermediate} and \autoref{app:intermediate-data-products}. 
 
 
 
@@ -180,7 +181,7 @@ The file format and the organization of files for the single-epoch and coadded i
 \subsubsection{Object and Truth-match Tables}
 \label{sec:representation-tables}
 
-All data tables in this release are stored in the Apache Parquet\footnote{\https{parquet.apache.org}} format, an efficient columnar storage form, with I/O tools readily available for multiple development systems. 
+All data tables in this release are stored in the Apache Parquet format,\footnote{\https{parquet.apache.org}} an efficient columnar storage form, with I/O tools readily available for multiple development systems. 
 The data files can be easily downloaded to the user's machine via Globus (\autoref{sec:download}), and read with Python packages such as \code{pyarrow} or \code{fastparquet}.\footnote{\code{pyarrow}: \https{arrow.apache.org/docs/python}; \code{fastparquet}: \https{fastparquet.readthedocs.io}}
 We additionally provide a Python package, \code{GCRCatalogs}, which contains a high-level user interface to access the data files (see \autoref{sec:gcr}). 
 
@@ -198,14 +199,17 @@ Each data table is further partitioned into several files that correspond to dif
 \subsubsection{Unmerged Truth Tables}
 \label{sec:representation-unmerged}
 
-Each of the four point source tables (star summary, star variability, SN summary, SN variability) is available in two physical formats: SQLite database file and parquet file.  The table schema is identical between the two formats. The galaxy summary is available only in Parquet, partitioned into healpix pixels.  
+Each of the four point-source tables (star summary, star variability, SN summary, SN variability) is available in two formats: SQLite and Apache Parquet.  The table schema is identical between the two formats.  These files are not partitioned by sky area. 
 
-The point source Parquet files are smaller than the SQlite versions, particularly in the case of the stellar variability truth table.  Also the Parquet files, and only the Parquet files, may be accessed via the Python package \code{GCRCatalogs}. However applications needing to do large numbers of queries of star light curves will benefit from the efficiency provided by SQLite since such queries run about $\sim$100 times faster on the SQLite files. 
+The point-source Parquet files are smaller than the SQlite versions; particularly in the case of the variability truth tables (SQlite versions are about 10 times larger).  Also the Parquet files, and only the Parquet files, may be accessed via the Python package \code{GCRCatalogs}. However, applications that require a large number of queries of light curves will benefit from the efficiency provided by SQLite; some queries can run more than 10 times faster with SQLite than with Numpy array indexing. 
+
+The galaxy summary table is available only in Parquet, partitioned into healpix pixels.  
 
 \subsubsection{Intermediate Data Products from LSST Science Pipelines}
 \label{sec:representation-intermediate}
 
-The coadded images we provided in this release are parts of the output files from v19.0.0 of the LSST Science Pipelines. These images are stored in the FITS (Flexible Image Transport System) format, and partitioned by filter (passband) and sky region. The sky region partition scheme follows the same ``Rings sky map'' described above. Each tract is further subdivided into ``patches'', and each individual coadded image file corresponds to a single patch. The descriptions of files included in this data set, and the associated filename patterns, can be found in \autoref{app:coadded-image-files}. 
+
+The intermediate data products we provide in this release are parts of the output files from v19.0.0 of the LSST Science Pipelines and they are stored in the original formats from the LSST Science Pipelines. Images are stored in the FITS (Flexible Image Transport System)format,\footnote{\https{fits.gsfc.nasa.gov/fits_standard.html}} and partitioned by filter (passband) and sky region. The sky region partition scheme follows the same ``Rings sky map'' described above. Each tract is further subdivided into ``patches'', and each individual coadded image file corresponds to a single patch. The descriptions of files included in this data set, and the associated filename patterns, can be found in \autoref{app:intermediate-data-products}. 
 
 
 \subsection{Downloading Data Files}
@@ -218,7 +222,7 @@ Detailed instructions on data transfers can be found on our data portal website 
 \subsection{Accessing Data in Python}
 \label{sec:gcr}
 
-While the tabular data files are accessible via standard Parquet I/O tools, we provide a high-level Python package, \code{GCRCatalogs}\footnote{\https{github.com/LSSTDESC/gcr-catalogs}}, to assist users to access DC2 data. 
+While the tabular data files are accessible via standard Parquet I/O tools, we provide a high-level Python package, \code{GCRCatalogs},\footnote{\https{github.com/LSSTDESC/gcr-catalogs}} to assist users to access DC2 data. 
 
 The \code{GCRCatalogs} package is installable by package managers \code{pip} and \code{conda}.
 Once installed, the package should be configured to recognize the path to which the data files have been downloaded. The DC2 data set will then be readily available in the user's own Python environment. 
@@ -260,7 +264,7 @@ For accessing the coadded images, we recommend using standard FITS I/O tools, su
 We provide two example Python Jupyter Notebooks which further demonstrate how to use \code{GCRCatalogs} to access the tabular data 
 (currently no example notebook is available for coadded images).
 They are designed as tutorials, with clear instructions (see a screenshot in \autoref{fig:notebook}). In addition to demonstrating the access method, these notebooks also explain the data model in detail, and provide a few simple analyses that can be used as starting points for further development (see an example plot from the notebook in \autoref{fig:number_density}).
-These notebooks can be found in a GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/tree/main/notebooks}}.
+These notebooks can be found in a GitHub repository.\footnote{\https{github.com/LSSTDESC/desc-data-portal/tree/main/notebooks}}
 
 \section{Summary and Outlook}
 \label{sec:outlook}
@@ -273,7 +277,7 @@ This data release (\thisversion{}) focuses on a limited set of data products gen
 If you use these data products in a publication, we ask that you cite this Note and the DC2 overview paper~\citep{2020arXiv201005926L}.
 If you use \code{GRCCatalogs} to access the data products, please also cite \cite{2018ApJS..234...36M}. 
 If you would like to serve these data sets on a mirror site, or to ingest and serve them via a different access method (e.g., a database), we ask you to inform LSST~DESC at \href{mailto:papers@lsstdesc.org}{papers@lsstdesc.org} so that we can contact you when future updates are made to these data sets.
-We encourage all users to provide feedback and ask questions via the ``Discussions'' feature in the dedicated GitHub repository\footnote{\https{github.com/LSSTDESC/desc-data-portal/discussions}}.
+We encourage all users to provide feedback and ask questions via the ``Discussions'' feature in the dedicated GitHub repository.\footnote{\https{github.com/LSSTDESC/desc-data-portal/discussions}}
 
 %%%%%% Appendices %%%%%% 
 \clearpage
@@ -327,7 +331,7 @@ We encourage all users to provide feedback and ask questions via the ``Discussio
 
 \bigskip
 \section{Intermediate Data Products File Descriptions}
-\label{app:coadded-image-files}
+\label{app:intermediate-data-products}
 \input{tables/coadded-image-files}
 
 

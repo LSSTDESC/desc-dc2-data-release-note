@@ -14,22 +14,21 @@
 \hline
 \insertTableNotes  % tell LaTeX where to insert the contents of "TableNotes"
 \endlastfoot
-\code{id} & string & -- & Unique object ID \\ 
+\code{id} & int64 & -- & Unique object ID \\ 
+\code{id_string} & string & -- & Unique object ID in string type \\ 
 \code{host_galaxy} & int64 & -- & ID of the host galaxy for a SN entry ($-1$ for other truth types)\\ 
+\code{truth_type} & int32 & -- & 1 for galaxies, 2 for stars, and 3 for SNe \\ 
 \code{ra} & float64 & degree & Right Ascension \\
 \code{dec} & float64 & degree & Declination \\
-\code{redshift} & float32 & -- & Redshift \\ 
-\code{is_variable} & int32 & -- & 1 for a variable source \\ 
-\code{is_pointsource} & int32 & -- & 1 for a point source \\ 
+\code{redshift} & float64 & -- & Redshift \\ 
 \code{flux_<band>} & float32 & nJy & Static flux value in \code{<band>} \\ 
-\code{flux_<band>_noMW} & float32 & nJy & Static flux value in \code{<band>}, without Milky Way extinction (i.e., dereddened) \\ 
 \code{mag_<band>}$^\text{\hyperlink{truth_fn2}{2}}$ & float32 & AB mag & Magnitude in \code{<band>} \\ 
-\code{mag_<band>_noMW}$^\text{\hyperlink{truth_fn2}{2}}$ & float32 & AB mag & Magnitude in \code{<band>}, without Milky Way extinction (i.e., dereddened) \\ 
+\code{av} & float32 & -- & Milky Way total extinction parameter $A(V)$ at object location \\ 
+\code{rv} & float32 & -- &  Milky Way relative visibility parameter $R(V) = A(V)/E(B-V)$ at object location \\ 
 \code{tract} & int64 & -- & Tract ID in Sky Map \\ 
 \code{patch} & string & -- & Patch ID in Sky Map (as a string, \code{`x,y'}) \\ 
 \code{cosmodc2_hp} & int64 & -- & Healpix ID in cosmoDC2 (for galaxies only; $-1$ for stars and SNe) \\ 
 \code{cosmodc2_id} & int64 & -- & Galaxy ID in cosmoDC2 (for galaxies only; $-1$ for stars and SNe)\\ 
-\code{truth_type} & int64 & -- & 1 for galaxies, 2 for stars, and 3 for SNe \\ 
 \code{match_objectId} & int64 & -- & \code{objectId} of the matching object entry ($-1$ for unmatched truth entries$^\text{\hyperlink{truth_fn3}{3}}$) \\ 
 \code{match_sep} & float64 & arcsec & On-sky angular separation of this object--truth matching pair ($-1$ for unmatched truth entries$^\text{\hyperlink{truth_fn3}{3}}$) \\ 
 \code{is_good_match} & bool & -- & \code{True} if this object--truth matching pair satisfies all matching criteria \\
