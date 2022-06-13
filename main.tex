@@ -201,7 +201,7 @@ Each data table is further partitioned into several files that correspond to dif
 
 Each of the four point-source tables (star summary, star variability, SN summary, SN variability) is available in two formats: SQLite and Apache Parquet.  The table schema is identical between the two formats.  These files are not partitioned by sky area. 
 
-The point-source Parquet files are smaller than the SQlite versions; particularly in the case of the variability truth tables (SQlite versions are about 10 times larger).  Also the Parquet files, and only the Parquet files, may be accessed via the Python package \code{GCRCatalogs}. However, applications that require a large number of queries of light curves will benefit from the efficiency provided by SQLite; some queries can run more than 10 times faster with SQLite than with Numpy array indexing. 
+The point-source Parquet files are smaller than the SQlite versions; particularly in the case of the variability truth tables (SQlite versions are about 10 times larger).  Also the Parquet files, and only the Parquet files, may be accessed via the Python package \code{GCRCatalogs}. However, some applications, such as querying light curves of specific objects, will greatly benefit from the efficiency provided by the SQLite files, which are indexed by object and visit IDs.
 
 The galaxy summary table is available only in Parquet, partitioned into healpix pixels.  
 
