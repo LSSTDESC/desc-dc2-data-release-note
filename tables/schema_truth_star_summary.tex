@@ -17,7 +17,8 @@
 \code{model} & string & -- & variability model\\
 \code{max_stdev_delta_mag} & float32 & AB mag & max stdev in delta magnitude across all bands\\
 \code{above_threshold} & bool & -- & True if above quantity satisfies threshold (here set to 1 mmag) for LSST detectability\\
-\code{av} & float32 & -- & Milky way extinction parameter at object location\\
-\code{rv} & float32 & -- & Milky way extinction parameter at object location\\
+\code{av} & float32 & -- & Milky Way total extinction parameter $A(V)$ at object location \\ 
+\code{rv} & float32 & -- &  Milky Way relative visibility parameter $R(V) = A(V)/E(B-V)$ at object location \\
+\hline
 \end{longtable}
 \end{ThreePartTable}
