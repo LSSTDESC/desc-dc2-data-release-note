@@ -1,4 +1,4 @@
-%\RequirePackage[2024-06-01]{latexrelease}
+%\RequirePackage[2024-06-01]{latexrelease}  % Uncomment this line if cannot compile
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \documentclass[modern]{descnote}
 \pdfoutput=1 %for arXiv submission
@@ -14,7 +14,8 @@
 \usepackage{threeparttablex}
 \usepackage{longtable}
 \usepackage{inconsolata}
-\usepackage[cachedir={_minted}]{minted}
+%\PassOptionsToPackage{frozencache=true}{minted}  % Uncomment this line for arXiv submission
+\usepackage[cachedir={_minted}]{minted} 
 
 \definecolor{DESCred}{rgb}{0.63,0.00,0.20}
 \hypersetup{colorlinks=true,breaklinks=true,
